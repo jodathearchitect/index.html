@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MTA Electrical Helper — Exam Prep</title>
+<meta name="application-name" content="MTA Exam Prep">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MTA Prep">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a1628">
+<meta name="description" content="MTA Electrical Helper exam prep — 200 questions, practice and exam modes, formula sheet.">
+<link rel="manifest" href="data:application/manifest+json,{
+  %22name%22:%22MTA%20Electrical%20Helper%20Exam%20Prep%22,
+  %22short_name%22:%22MTA%20Prep%22,
+  %22description%22:%22200-question%20MTA%20Electrical%20Helper%20exam%20prep%20app%22,
+  %22start_url%22:%22.%22,
+  %22display%22:%22standalone%22,
+  %22background_color%22:%22%230a1628%22,
+  %22theme_color%22:%22%230a1628%22,
+  %22orientation%22:%22portrait%22,
+  %22icons%22:[
+    {%22src%22:%22data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20192%20192'%3E%3Crect%20width='192'%20height='192'%20fill='%230a1628'/%3E%3Ccircle%20cx='96'%20cy='96'%20r='80'%20fill='%231a3a6b'/%3E%3Ctext%20x='96'%20y='118'%20font-size='90'%20text-anchor='middle'%20fill='%23f0a500'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22192x192%22,%22type%22:%22image/svg+xml%22},
+    {%22src%22:%22data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3Crect%20width='512'%20height='512'%20fill='%230a1628'/%3E%3Ccircle%20cx='256'%20cy='256'%20r='220'%20fill='%231a3a6b'/%3E%3Ctext%20x='256'%20y='320'%20font-size='240'%20text-anchor='middle'%20fill='%23f0a500'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22}
+  ]
+}">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%230a1628'/><circle cx='90' cy='90' r='72' fill='%231a3a6b'/><text x='90' y='118' font-size='90' text-anchor='middle' fill='%23f0a500'>⚡</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0a1628; --navy2:#0f2040; --blue:#1a3a6b;
+  --accent:#f0a500; --accent2:#ffbe3d;
+  --green:#00c853; --red:#ff3d3d; --purple:#7c4dff;
+  --white:#f5f7fa; --gray:#8a9bb5; --card:#0d1f3c; --border:#1e3a5f;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--navy);color:var(--white);font-family:'Barlow',sans-serif;min-height:100vh;overflow-x:hidden;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(240,165,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(240,165,0,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.screen{display:none;position:relative;z-index:1;}
+.screen.active{display:flex;flex-direction:column;min-height:100vh;}
+#home{align-items:center;justify-content:center;padding:32px 20px;padding-top:calc(32px + env(safe-area-inset-top));gap:0;}
+.logo-badge{background:var(--accent);color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:6px 16px;border-radius:2px;margin-bottom:20px;}
+.home-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(48px,12vw,90px);line-height:.9;text-align:center;text-transform:uppercase;margin-bottom:6px;}
+.home-title span{color:var(--accent);display:block;}
+.home-subtitle{color:var(--gray);font-size:14px;text-align:center;margin-bottom:24px;letter-spacing:.5px;}
+.home-progress{width:100%;max-width:380px;margin-bottom:24px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 18px;}
+.hp-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:12px;}
+.hp-bars{display:flex;align-items:flex-end;gap:8px;height:60px;}
+.hp-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;}
+.hp-bar{width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:4px;transition:height .5s ease;}
+.hp-bar.empty{background:var(--border);}
+.hp-score{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;color:var(--gray);}
+.hp-stats{display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+.hp-stat{text-align:center;flex:1;}
+.hp-stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;color:var(--accent);line-height:1;}
+.hp-stat-label{font-size:10px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.hp-empty-msg{color:var(--gray);font-size:13px;text-align:center;padding:8px 0;}
+.btn-electrical{background:var(--accent);color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;letter-spacing:2px;text-transform:uppercase;border:none;padding:18px 44px;border-radius:4px;cursor:pointer;transition:all .15s;margin-bottom:16px;width:100%;max-width:380px;}
+.btn-electrical:hover{background:var(--accent2);transform:translateY(-2px);}
+.btn-formula-home{background:transparent;color:var(--gray);border:1px solid var(--border);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:12px 24px;border-radius:4px;cursor:pointer;transition:all .15s;width:100%;max-width:380px;}
+.btn-formula-home:hover{color:var(--accent);border-color:var(--accent);}
+#mode-select{align-items:center;justify-content:flex-start;padding:32px 20px 60px;padding-top:calc(32px + env(safe-area-inset-top));}
+.screen-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:6px;}
+.screen-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(32px,8vw,56px);text-transform:uppercase;text-align:center;margin-bottom:20px;}
+.q-count-wrap{width:100%;max-width:420px;margin-bottom:20px;text-align:center;}
+.q-count-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:10px;}
+.q-count-pills{display:flex;gap:8px;justify-content:center;}
+.q-pill{background:var(--card);border:2px solid var(--border);color:var(--gray);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;width:58px;height:44px;border-radius:6px;cursor:pointer;transition:all .15s;}
+.q-pill:hover{border-color:var(--accent);color:var(--white);}
+.q-pill.active{background:var(--accent);border-color:var(--accent);color:var(--navy);}
+.mode-cards{display:flex;flex-direction:column;gap:12px;width:100%;max-width:420px;}
+.mode-card{background:var(--card);border:2px solid var(--border);border-radius:8px;padding:22px;cursor:pointer;transition:all .2s;text-align:left;width:100%;}
+.mode-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.mode-card.practice:hover{border-color:var(--green);}
+.mode-card.exam:hover{border-color:var(--accent);}
+.mode-card.flashcard:hover{border-color:var(--purple);}
+.mode-card.drill:hover{border-color:var(--red);}
+.mode-icon{font-size:26px;margin-bottom:8px;}
+.mode-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:24px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.mode-card.practice .mode-name{color:var(--green);}
+.mode-card.exam .mode-name{color:var(--accent);}
+.mode-card.flashcard .mode-name{color:var(--purple);}
+.mode-card.drill .mode-name{color:var(--red);}
+.mode-desc{color:var(--gray);font-size:13px;line-height:1.5;}
+.mode-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.pill{font-size:10px;padding:3px 9px;border-radius:20px;border:1px solid;letter-spacing:.5px;font-weight:600;}
+.mode-card.practice .pill{border-color:var(--green);color:var(--green);}
+.mode-card.exam .pill{border-color:var(--accent);color:var(--accent);}
+.mode-card.flashcard .pill{border-color:var(--purple);color:var(--purple);}
+.mode-card.drill .pill{border-color:var(--red);color:var(--red);}
+.btn-back{background:transparent;color:var(--gray);border:1px solid var(--border);font-family:'Barlow',sans-serif;font-size:13px;padding:9px 20px;border-radius:4px;cursor:pointer;margin-top:14px;transition:all .15s;}
+.btn-back:hover{color:var(--white);border-color:var(--gray);}
+.drill-unavail{font-size:11px;color:var(--red);text-align:center;margin-top:6px;display:none;}
+.quiz-header{background:var(--navy2);border-bottom:1px solid var(--border);padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:10;}
+.quiz-mode-badge{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:3px;flex-shrink:0;}
+.quiz-mode-badge.practice{background:rgba(0,200,83,.15);color:var(--green);}
+.quiz-mode-badge.exam{background:rgba(240,165,0,.15);color:var(--accent);}
+.quiz-mode-badge.flashcard{background:rgba(124,77,255,.15);color:var(--purple);}
+.quiz-mode-badge.drill{background:rgba(255,61,61,.15);color:var(--red);}
+.quiz-progress-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.quiz-counter{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:var(--white);letter-spacing:1px;}
+.progress-bar{width:100%;max-width:180px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s ease;}
+.practice .progress-fill{background:var(--green);}
+.flashcard .progress-fill{background:var(--purple);}
+.drill .progress-fill{background:var(--red);}
+.quiz-right-info{display:flex;align-items:center;gap:7px;}
+.streak-badge{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;color:var(--accent);display:none;}
+.streak-badge.visible{display:block;}
+.timer-display{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;color:var(--white);letter-spacing:1px;display:none;}
+.flag-btn,.tapout-btn,.tts-btn-hdr{background:none;border:1px solid var(--border);color:var(--gray);width:32px;height:32px;border-radius:4px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.flag-btn.flagged{border-color:var(--accent);color:var(--accent);background:rgba(240,165,0,.1);}
+.tapout-btn{background:rgba(255,61,61,.1);border-color:rgba(255,61,61,.3);color:var(--red);}
+.tapout-btn:hover{background:rgba(255,61,61,.2);border-color:var(--red);}
+.quiz-action-row{display:flex;gap:10px;margin-bottom:16px;}
+.btn-hint{flex:1;background:rgba(124,77,255,.1);border:1px solid rgba(124,77,255,.35);color:var(--purple);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;border-radius:6px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn-hint:hover{background:rgba(124,77,255,.2);border-color:var(--purple);}
+.btn-hint:disabled{opacity:.35;cursor:default;}
+.btn-hint.used{opacity:.4;cursor:default;}
+.btn-formula-quiz{flex:1;background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.3);color:var(--accent);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;border-radius:6px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn-formula-quiz:hover{background:rgba(240,165,0,.15);border-color:var(--accent);}
+.hint-box{background:rgba(124,77,255,.08);border:1px solid rgba(124,77,255,.3);border-radius:8px;padding:14px 16px;margin-bottom:16px;display:none;animation:fadeUp .2s ease;}
+.hint-box.visible{display:block;}
+.hint-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--purple);margin-bottom:6px;}
+.hint-text{font-size:13px;color:var(--white);opacity:.85;line-height:1.5;}
+.streak-cost{font-size:10px;color:rgba(124,77,255,.6);margin-top:4px;font-style:italic;}
+#quiz{padding:0;min-height:100vh;}
+.quiz-body{padding:20px 18px 40px;max-width:640px;margin:0 auto;width:100%;}
+.passage-box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:18px;}
+.passage-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:8px;}
+.passage-text{font-size:14px;line-height:1.7;color:var(--white);opacity:.9;}
+.passage-group-tag{font-size:11px;color:var(--gray);margin-bottom:4px;letter-spacing:.5px;}
+.diagram-box{background:#060f1e;border:2px solid var(--accent);border-radius:10px;padding:14px 10px 10px;margin-bottom:18px;position:relative;overflow:hidden;}
+.diagram-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(240,165,0,.06),transparent 70%);pointer-events:none;}
+.diagram-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.diagram-label::after{content:'';flex:1;height:1px;background:rgba(240,165,0,.25);}
+.diagram-svg-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.diagram-svg-wrap svg{display:block;margin:0 auto;max-width:100%;}
+.diagram-group-tag{font-size:11px;color:var(--accent);margin-top:8px;text-align:center;opacity:.7;letter-spacing:.5px;}
+.q-top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.category-tag{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
+.tts-btn{background:var(--card);border:1px solid var(--border);color:var(--gray);width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.tts-btn:hover{border-color:var(--accent);color:var(--accent);}
+.tts-btn.speaking{border-color:var(--accent);background:rgba(240,165,0,.15);animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(240,165,0,.4);}50%{box-shadow:0 0 0 6px rgba(240,165,0,0);}}
+.question-text{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(20px,5vw,28px);line-height:1.25;margin-bottom:24px;color:var(--white);}
+.options-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.option-btn{background:var(--card);border:2px solid var(--border);color:var(--white);font-family:'Barlow',sans-serif;font-size:15px;font-weight:500;padding:16px 18px;border-radius:8px;cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:flex-start;gap:12px;line-height:1.4;}
+.option-btn:hover:not(:disabled){border-color:var(--accent);background:rgba(240,165,0,.06);}
+.option-btn:disabled{cursor:default;}
+.option-letter{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;min-width:22px;color:var(--gray);line-height:1.2;flex-shrink:0;}
+.option-btn.correct{border-color:var(--green);background:rgba(0,200,83,.1);}
+.option-btn.correct .option-letter{color:var(--green);}
+.option-btn.selected-wrong{border-color:var(--red);background:rgba(255,61,61,.08);animation:shake .3s ease;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+.feedback-box{border-radius:8px;padding:16px 18px;margin-bottom:18px;display:none;animation:fadeUp .25s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.feedback-box.correct-fb{background:rgba(0,200,83,.1);border:1px solid rgba(0,200,83,.3);display:block;}
+.feedback-box.wrong-fb{background:rgba(255,61,61,.08);border:1px solid rgba(255,61,61,.25);display:block;}
+.feedback-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.feedback-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:1px;}
+.correct-fb .feedback-title{color:var(--green);}
+.wrong-fb .feedback-title{color:var(--red);}
+.feedback-text{font-size:13px;color:var(--white);line-height:1.6;opacity:.85;}
+.btn-next{background:var(--accent);color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:2px;text-transform:uppercase;border:none;padding:15px;border-radius:4px;cursor:pointer;width:100%;transition:all .15s;display:none;}
+.btn-next:hover{background:var(--accent2);}
+.btn-next.visible{display:block;}
+.btn-next.practice-style{background:var(--green);}
+.btn-next.practice-style:hover{background:#00e676;}
+.btn-next.drill-style{background:var(--red);}
+.flashcard-body{padding:24px 18px 40px;max-width:500px;margin:0 auto;width:100%;display:flex;flex-direction:column;align-items:center;}
+.fc-card{background:var(--card);border:2px solid var(--border);border-radius:12px;width:100%;min-height:220px;padding:28px 24px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;transition:all .2s;margin-bottom:20px;position:relative;}
+.fc-card:hover{border-color:var(--purple);}
+.fc-card.flipped{border-color:var(--purple);background:rgba(124,77,255,.08);}
+.fc-tap-hint{font-size:11px;color:var(--gray);text-align:center;margin-bottom:8px;letter-spacing:1px;}
+.fc-q{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(18px,5vw,24px);line-height:1.3;color:var(--white);text-align:center;}
+.fc-a{font-size:15px;line-height:1.6;color:var(--purple);text-align:center;display:none;font-weight:600;}
+.fc-card.flipped .fc-q{color:var(--gray);font-size:14px;margin-bottom:12px;}
+.fc-card.flipped .fc-a{display:block;}
+.fc-cat{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);text-align:center;margin-bottom:12px;}
+.fc-actions{display:flex;gap:12px;width:100%;}
+.fc-btn{flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:14px;border-radius:4px;cursor:pointer;border:none;transition:all .15s;}
+.fc-btn.knew{background:var(--green);color:var(--navy);}
+.fc-btn.knew:hover{background:#00e676;}
+.fc-btn.missed{background:rgba(255,61,61,.15);color:var(--red);border:1px solid var(--red);}
+.fc-btn.missed:hover{background:rgba(255,61,61,.25);}
+#formula-sheet{padding:0;}
+.fs-header{background:var(--navy2);border-bottom:1px solid var(--border);padding:14px 18px;padding-top:calc(14px + env(safe-area-inset-top));display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:10;}
+.fs-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);flex:1;}
+.fs-body{padding:18px;max-width:600px;margin:0 auto;padding-bottom:60px;}
+.fs-section{margin-bottom:28px;}
+.fs-section-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.fs-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(30,58,95,.5);}
+.fs-formula{font-family:'Courier New',monospace;font-weight:700;font-size:16px;color:var(--white);min-width:160px;flex-shrink:0;}
+.fs-desc{font-size:13px;color:var(--gray);line-height:1.4;flex:1;}
+.fs-prefix-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.fs-prefix-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center;}
+.fs-prefix-sym{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;color:var(--accent);}
+.fs-prefix-name{font-size:11px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin:2px 0;}
+.fs-prefix-val{font-size:12px;color:var(--white);}
+#results{align-items:center;justify-content:flex-start;padding:32px 20px 60px;padding-top:calc(32px + env(safe-area-inset-top));}
+.results-header{text-align:center;margin-bottom:32px;width:100%;max-width:480px;}
+.results-score-ring{width:140px;height:140px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;border:5px solid var(--accent);background:var(--card);}
+.results-score-ring.pass{border-color:var(--green);}
+.results-score-ring.fail{border-color:var(--red);}
+.score-fraction{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:38px;line-height:1;color:var(--white);}
+.score-pct{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--accent);}
+.results-score-ring.pass .score-pct{color:var(--green);}
+.results-score-ring.fail .score-pct{color:var(--red);}
+.results-verdict{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:32px;text-transform:uppercase;margin-bottom:6px;}
+.results-verdict.pass{color:var(--green);}
+.results-verdict.fail{color:var(--red);}
+.results-sub{color:var(--gray);font-size:13px;line-height:1.5;}
+.category-breakdown{width:100%;max-width:480px;margin-bottom:28px;}
+.breakdown-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:12px;}
+.breakdown-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.breakdown-cat{font-size:12px;font-weight:600;min-width:120px;color:var(--white);}
+.breakdown-bar-wrap{flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden;}
+.breakdown-bar{height:100%;border-radius:4px;}
+.breakdown-frac{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;min-width:32px;text-align:right;}
+.results-actions{display:flex;flex-direction:column;gap:10px;width:100%;max-width:480px;}
+.btn-review{background:var(--card);border:2px solid var(--border);color:var(--white);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:14px;border-radius:4px;cursor:pointer;transition:all .15s;}
+.btn-review:hover{border-color:var(--accent);color:var(--accent);}
+.btn-home-res{background:var(--accent);color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:2px;text-transform:uppercase;border:none;padding:15px;border-radius:4px;cursor:pointer;transition:all .15s;}
+.btn-home-res:hover{background:var(--accent2);}
+#review{padding:0;}
+.review-header{background:var(--navy2);border-bottom:1px solid var(--border);padding:14px 18px;padding-top:calc(14px + env(safe-area-inset-top));display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:10;}
+.review-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:1px;flex:1;}
+.review-body{padding:18px;max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:14px;padding-bottom:60px;}
+.review-card{background:var(--card);border-radius:8px;padding:18px;border-left:4px solid;}
+.review-card.wrong-card{border-color:var(--red);}
+.review-card.flagged-card{border-color:var(--accent);}
+.review-q-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.review-status{font-size:16px;flex-shrink:0;}
+.review-q-num{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;}
+.review-q-text{font-weight:600;font-size:14px;line-height:1.4;margin-bottom:10px;color:var(--white);}
+.review-answer-row{font-size:12px;margin-bottom:3px;}
+.review-correct-ans{color:var(--green);}
+.review-wrong-ans{color:var(--red);}
+.review-explanation{font-size:12px;color:var(--gray);line-height:1.5;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+.modal-overlay{position:fixed;inset:0;background:rgba(5,12,24,.88);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;}
+.modal-box{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:32px 24px;width:100%;max-width:340px;text-align:center;animation:fadeUp .2s ease;}
+.modal-icon{font-size:36px;margin-bottom:10px;}
+.modal-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;text-transform:uppercase;margin-bottom:10px;color:var(--white);}
+.modal-desc{color:var(--gray);font-size:14px;line-height:1.5;margin-bottom:24px;}
+.modal-actions{display:flex;flex-direction:column;gap:8px;}
+.modal-btn-confirm{background:var(--red);color:white;border:none;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:1px;text-transform:uppercase;padding:13px;border-radius:4px;cursor:pointer;}
+
+.fs-tabs{display:flex;gap:0;margin-bottom:0;border-bottom:2px solid var(--border);}
+.fs-tab{flex:1;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:12px 8px;border:none;background:transparent;color:var(--gray);cursor:pointer;transition:all .15s;border-bottom:3px solid transparent;margin-bottom:-2px;}
+.fs-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.fs-tab:first-child.active{color:var(--accent);}
+.fs-tab:last-child.active{color:var(--purple);border-bottom-color:var(--purple);}
+.fs-panel{display:none;}.fs-panel.active{display:block;}
+.gl-section{margin-bottom:28px;}
+.gl-section-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--purple);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.gl-item{padding:10px 0;border-bottom:1px solid rgba(30,58,95,.5);display:flex;gap:12px;align-items:flex-start;}
+.gl-term{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;color:var(--white);min-width:140px;flex-shrink:0;line-height:1.3;}
+.gl-def{font-size:13px;color:var(--gray);line-height:1.5;flex:1;}
+
+.modal-btn-cancel{background:transparent;color:var(--gray);border:1px solid var(--border);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:1px;text-transform:uppercase;padding:11px;border-radius:4px;cursor:pointer;}
+</style>
+</head>
+<body>
+<div id="home" class="screen active">
+  <div class="logo-badge">MTA Electrical Helper</div>
+  <div class="home-title">Exam<span>Prep</span></div>
+  <p class="home-subtitle">200 questions · 12 categories · Built for the real exam</p>
+  <div class="home-progress" id="home-progress">
+    <div class="hp-label">Last 5 Sessions</div>
+    <div id="hp-bars-wrap"><div class="hp-empty-msg">No sessions yet — start your first test!</div></div>
+    <div class="hp-stats" id="hp-stats" style="display:none">
+      <div class="hp-stat"><div class="hp-stat-num" id="hp-best">—</div><div class="hp-stat-label">Best</div></div>
+      <div class="hp-stat"><div class="hp-stat-num" id="hp-avg">—</div><div class="hp-stat-label">Avg</div></div>
+      <div class="hp-stat"><div class="hp-stat-num" id="hp-sessions">0</div><div class="hp-stat-label">Sessions</div></div>
+    </div>
+  </div>
+  <button class="btn-electrical" onclick="showScreen('mode-select')">⚡ Start Training</button>
+  <button class="btn-formula-home" onclick="openSheet('formulas')">📐 Formula Sheet</button>
+  <button class="btn-formula-home" onclick="openSheet('glossary')" style="margin-top:0">📖 Reference Glossary</button>
+</div>
+
+<div id="mode-select" class="screen">
+  <div class="screen-label" style="margin-top:32px">Choose Your Mode</div>
+  <div class="screen-title">How do you<br>want to train?</div>
+  <div class="q-count-wrap">
+    <div class="q-count-label">Questions per session</div>
+    <div class="q-count-pills">
+      <button class="q-pill active" onclick="setCount(10,this)">10</button>
+      <button class="q-pill" onclick="setCount(15,this)">15</button>
+      <button class="q-pill" onclick="setCount(30,this)">30</button>
+      <button class="q-pill" onclick="setCount(60,this)">60</button>
+    </div>
+  </div>
+  <div class="mode-cards">
+    <button class="mode-card practice" onclick="startQuiz('practice')">
+      <div class="mode-icon">🎯</div>
+      <div class="mode-name">Practice</div>
+      <div class="mode-desc">Instant feedback, one retry, full explanations. Read-aloud on every question.</div>
+      <div class="mode-pills"><span class="pill">Feedback</span><span class="pill">Explanations</span><span class="pill">🔊 Audio</span><span class="pill">🔥 Streak</span></div>
+    </button>
+    <button class="mode-card exam" onclick="startQuiz('exam')">
+      <div class="mode-icon">📋</div>
+      <div class="mode-name">Exam Mode</div>
+      <div class="mode-desc">Simulates the real test. Timer on. No hints until the end. Tap Out anytime.</div>
+      <div class="mode-pills"><span class="pill">Timed</span><span class="pill">Tap Out</span><span class="pill">Score + %</span><span class="pill">Breakdown</span></div>
+    </button>
+    <button class="mode-card flashcard" onclick="startFlashcard()">
+      <div class="mode-icon">🃏</div>
+      <div class="mode-name">Flashcards</div>
+      <div class="mode-desc">Pure recall — no multiple choice. Tap to flip, mark what you knew vs missed.</div>
+      <div class="mode-pills"><span class="pill">Flip to Reveal</span><span class="pill">Knew It / Missed It</span></div>
+    </button>
+    <button class="mode-card drill" id="drill-btn" onclick="startDrill()">
+      <div class="mode-icon">🎯</div>
+      <div class="mode-name">Weak Spot Drill</div>
+      <div class="mode-desc">Targets your worst categories based on your history. Needs 2+ sessions.</div>
+      <div class="mode-pills"><span class="pill">Adaptive</span><span class="pill">Targeted</span><span class="pill">Auto-Focus</span></div>
+    </button>
+    <div class="drill-unavail" id="drill-unavail">Complete 2+ sessions to unlock Weak Spot Drill</div>
+  </div>
+  <button class="btn-formula-home" onclick="openSheet('glossary')" style="width:100%;max-width:420px;margin-top:8px">📖 Reference Glossary</button>
+  <button class="btn-back" onclick="showScreen('home')">← Back</button>
+</div>
+
+<div id="quiz" class="screen">
+  <div class="quiz-header">
+    <span class="quiz-mode-badge" id="mode-badge">Practice</span>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-counter" id="quiz-counter">Q 1 / 10</span>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="quiz-right-info">
+      <span class="streak-badge" id="streak-badge">🔥 0</span>
+      <div class="timer-display" id="timer-display">00:00</div>
+      <button class="flag-btn" id="flag-btn" onclick="toggleFlag()" title="Flag">🚩</button>
+      <button class="tapout-btn" id="tapout-btn" onclick="tapOut()" title="Tap Out">✋</button>
+    </div>
+  </div>
+  <div class="quiz-body">
+    <div id="passage-area" style="display:none">
+      <div class="passage-box">
+        <div class="passage-label">📄 Read the Following Passage</div>
+        <div class="passage-text" id="passage-text"></div>
+      </div>
+      <div class="passage-group-tag" id="passage-group-tag"></div>
+    </div>
+    <div id="diagram-area" style="display:none">
+      <div class="diagram-box">
+        <div class="diagram-label">⚡ Circuit Diagram</div>
+        <div class="diagram-svg-wrap" id="diagram-svg-wrap"></div>
+        <div class="diagram-group-tag" id="diagram-group-tag"></div>
+      </div>
+    </div>
+    <div class="q-top-row">
+      <div class="category-tag" id="q-category">Category</div>
+      <button class="tts-btn" id="tts-q-btn" onclick="speakQuestion()" title="Read aloud">🔊</button>
+    </div>
+    <div class="question-text" id="q-text">Question text</div>
+    <div class="quiz-action-row" id="quiz-action-row">
+      <button class="btn-hint" id="btn-hint" onclick="useHint()" title="Get a hint — costs your streak">💬 Hint</button>
+      <button class="btn-formula-quiz" onclick="openSheet('formulas')">📐 Formulas</button>
+    </div>
+    <div class="hint-box" id="hint-box">
+      <div class="hint-label">💡 Hint</div>
+      <div class="hint-text" id="hint-text"></div>
+      <div class="streak-cost" id="streak-cost-msg"></div>
+    </div>
+    <div class="options-list" id="options-list"></div>
+    <div class="feedback-box" id="feedback-box">
+      <div class="feedback-header">
+        <div class="feedback-title" id="feedback-title"></div>
+        <button class="tts-btn" id="tts-exp-btn" onclick="speakExplanation()" title="Read explanation" style="display:none">🔊</button>
+      </div>
+      <div class="feedback-text" id="feedback-text"></div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">Next →</button>
+  </div>
+</div>
+
+<div id="flashcard" class="screen">
+  <div class="quiz-header">
+    <span class="quiz-mode-badge flashcard">Flashcards</span>
+    <div class="quiz-progress-wrap">
+      <span class="quiz-counter" id="fc-counter">1 / 30</span>
+      <div class="progress-bar"><div class="progress-fill" id="fc-progress" style="width:0%;background:var(--purple)"></div></div>
+    </div>
+    <div class="quiz-right-info">
+      <span style="font-size:12px;color:var(--green);font-weight:700;" id="fc-knew-count">✓ 0</span>
+      <span style="font-size:12px;color:var(--red);font-weight:700;" id="fc-miss-count">✗ 0</span>
+      <button class="btn-back" style="margin:0;padding:6px 12px;" onclick="showScreen('mode-select')">✕</button>
+    </div>
+  </div>
+  <div class="flashcard-body">
+    <div class="fc-cat" id="fc-cat">Category</div>
+    <div class="fc-tap-hint" id="fc-hint">Tap card to reveal answer</div>
+    <div class="fc-card" id="fc-card" onclick="flipCard()">
+      <div class="fc-q" id="fc-q">Question</div>
+      <div class="fc-a" id="fc-a">Answer</div>
+    </div>
+    <div class="fc-actions" id="fc-actions" style="display:none">
+      <button class="fc-btn missed" onclick="fcAnswer(false)">✗ Missed It</button>
+      <button class="fc-btn knew" onclick="fcAnswer(true)">✓ Knew It</button>
+    </div>
+    <div style="display:flex;gap:10px;width:100%;margin-top:12px;" id="fc-before-actions">
+      <button class="btn-back" style="flex:1;text-align:center;" onclick="showScreen('mode-select')">Quit</button>
+    </div>
+  </div>
+</div>
+
+<div id="formula-sheet" class="screen">
+  <div class="fs-header">
+    <button class="btn-back" style="margin:0;padding:6px 14px;" onclick="goBackFromFormula()">←</button>
+    <div class="fs-title">⚡ Reference</div>
+  </div>
+  <div class="fs-tabs">
+    <button class="fs-tab active" id="tab-formulas" onclick="switchTab('formulas')">📐 Formulas</button>
+    <button class="fs-tab" id="tab-glossary" onclick="switchTab('glossary')">📖 Glossary</button>
+  </div>
+  <div class="fs-body">
+  <div class="fs-panel active" id="panel-formulas">
+    <div class="fs-section">
+      <div class="fs-section-title">Ohm's Law</div>
+      <div class="fs-row"><span class="fs-formula">V = I × R</span><span class="fs-desc">Voltage = Current × Resistance. The foundation of all circuit math.</span></div>
+      <div class="fs-row"><span class="fs-formula">I = V ÷ R</span><span class="fs-desc">Current = Voltage ÷ Resistance. Find amps when you know volts and ohms.</span></div>
+      <div class="fs-row"><span class="fs-formula">R = V ÷ I</span><span class="fs-desc">Resistance = Voltage ÷ Current. Find ohms when you know volts and amps.</span></div>
+    </div>
+    <div class="fs-section">
+      <div class="fs-section-title">Power (Watt's Law)</div>
+      <div class="fs-row"><span class="fs-formula">P = V × I</span><span class="fs-desc">Power = Voltage × Current. Most common power formula.</span></div>
+      <div class="fs-row"><span class="fs-formula">P = I² × R</span><span class="fs-desc">Use when you have current and resistance but no voltage.</span></div>
+      <div class="fs-row"><span class="fs-formula">P = V² ÷ R</span><span class="fs-desc">Use when you have voltage and resistance but no current.</span></div>
+      <div class="fs-row"><span class="fs-formula">I = P ÷ V</span><span class="fs-desc">Find current from power rating and voltage.</span></div>
+      <div class="fs-row"><span class="fs-formula">R = V² ÷ P</span><span class="fs-desc">Find resistance from voltage and power.</span></div>
+    </div>
+    <div class="fs-section">
+      <div class="fs-section-title">Series Circuits</div>
+      <div class="fs-row"><span class="fs-formula">R_T = R₁+R₂+R₃</span><span class="fs-desc">Total resistance = sum of all resistors. Current is the same everywhere.</span></div>
+      <div class="fs-row"><span class="fs-formula">V_T = V₁+V₂+V₃</span><span class="fs-desc">Voltage drops add up to equal the source voltage (KVL).</span></div>
+    </div>
+    <div class="fs-section">
+      <div class="fs-section-title">Parallel Circuits</div>
+      <div class="fs-row"><span class="fs-formula">1/R_T=1/R₁+1/R₂</span><span class="fs-desc">General parallel resistance formula. R_T is always less than smallest branch.</span></div>
+      <div class="fs-row"><span class="fs-formula">R_T=(R₁×R₂)÷(R₁+R₂)</span><span class="fs-desc">Shortcut for exactly TWO parallel resistors.</span></div>
+      <div class="fs-row"><span class="fs-formula">R_T = R ÷ n</span><span class="fs-desc">When all n resistors are equal value R.</span></div>
+      <div class="fs-row"><span class="fs-formula">I_T = I₁+I₂+I₃</span><span class="fs-desc">Branch currents add up (KCL). Voltage is same across all branches.</span></div>
+    </div>
+    <div class="fs-section">
+      <div class="fs-section-title">Kirchhoff's Laws</div>
+      <div class="fs-row"><span class="fs-formula">ΣI_in = ΣI_out</span><span class="fs-desc">KCL: Current into a node = current out. Conservation of charge.</span></div>
+      <div class="fs-row"><span class="fs-formula">ΣV = 0 (loop)</span><span class="fs-desc">KVL: Sum of all voltages around a closed loop = zero.</span></div>
+    </div>
+    <div class="fs-section">
+      <div class="fs-section-title">AC & Transformers</div>
+      <div class="fs-row"><span class="fs-formula">V₁/V₂ = N₁/N₂</span><span class="fs-desc">Transformer voltage ratio = turns ratio.</span></div>
+      <div class="fs-row"><span class="fs-formula">Vrms = Vp ÷ √2</span><span class="fs-desc">RMS = Peak × 0.707. The effective (working) AC voltage.</span></div>
+      <div class="fs-row"><span class="fs-formula">Vp = Vrms × 1.414</span><span class="fs-desc">Peak voltage from RMS. 120V outlet peaks at ~170V.</span></div>
+      <div class="fs-row"><span class="fs-formula">T = 1 ÷ f</span><span class="fs-desc">Period (seconds) = 1 ÷ frequency. At 60Hz: T = 0.0167s.</span></div>
+      <div class="fs-row"><span class="fs-formula">XL = 2πfL</span><span class="fs-desc">Inductive reactance in ohms. Increases with frequency.</span></div>
+    </div>
+    <div class="fs-section">
+      <div class="fs-section-title">Wire Sizing (AWG)</div>
+      <div class="fs-row"><span class="fs-formula">14 AWG → 15A</span><span class="fs-desc">Minimum for 15A circuits. General lighting.</span></div>
+      <div class="fs-row"><span class="fs-formula">12 AWG → 20A</span><span class="fs-desc">Kitchen, bathroom, workshop outlets.</span></div>
+      <div class="fs-row"><span class="fs-formula">10 AWG → 30A</span><span class="fs-desc">Dryers, A/C units, water heaters.</span></div>
+      <div class="fs-row"><span class="fs-formula">8 AWG → 40A</span><span class="fs-desc">Electric ranges, large A/C.</span></div>
+      <div class="fs-row"><span class="fs-formula">Lower # = Thicker</span><span class="fs-desc">Lower AWG number = thicker wire = more current capacity.</span></div>
+    </div>
+    <div class="fs-section">
+      <div class="fs-section-title">Derating Rules</div>
+      <div class="fs-row"><span class="fs-formula">4–6 wires → 80%</span><span class="fs-desc">Derate ampacity to 80% when 4–6 conductors in same conduit.</span></div>
+      <div class="fs-row"><span class="fs-formula">7–9 wires → 70%</span><span class="fs-desc">Derate to 70% for 7–9 conductors bundled together.</span></div>
+      <div class="fs-row"><span class="fs-formula">10–20 wires → 50%</span><span class="fs-desc">Derate to 50% for 10–20 conductors.</span></div>
+    </div>
+    <div class="fs-section">
+      <div class="fs-section-title">Unit Prefixes</div>
+      <div class="fs-prefix-grid">
+        <div class="fs-prefix-card"><div class="fs-prefix-sym">M</div><div class="fs-prefix-name">Mega</div><div class="fs-prefix-val">× 1,000,000</div></div>
+        <div class="fs-prefix-card"><div class="fs-prefix-sym">k</div><div class="fs-prefix-name">Kilo</div><div class="fs-prefix-val">× 1,000</div></div>
+        <div class="fs-prefix-card"><div class="fs-prefix-sym">m</div><div class="fs-prefix-name">Milli</div><div class="fs-prefix-val">÷ 1,000</div></div>
+        <div class="fs-prefix-card"><div class="fs-prefix-sym">μ</div><div class="fs-prefix-name">Micro</div><div class="fs-prefix-val">÷ 1,000,000</div></div>
+        <div class="fs-prefix-card"><div class="fs-prefix-sym">√2</div><div class="fs-prefix-name">Root 2</div><div class="fs-prefix-val">≈ 1.414</div></div>
+        <div class="fs-prefix-card"><div class="fs-prefix-sym">√3</div><div class="fs-prefix-name">Root 3</div><div class="fs-prefix-val">≈ 1.732</div></div>
+      </div>
+    </div>
+  </div><!-- end panel-formulas -->
+
+  <div class="fs-panel" id="panel-glossary">
+    <div class="fs-body" style="padding-top:8px">
+
+      <div class="gl-section">
+        <div class="gl-section-title">🔬 Meters &amp; Instruments</div>
+        <div class="gl-item"><div class="gl-term">Voltmeter</div><div class="gl-def">Measures voltage between two points. Always connected in parallel (across) the component. Has very high internal resistance so it doesn't affect the circuit.</div></div>
+        <div class="gl-item"><div class="gl-term">Ammeter</div><div class="gl-def">Measures current flow. Always connected in series — all current must pass through it. Near-zero internal resistance. NEVER connect in parallel — will short-circuit and destroy the meter.</div></div>
+        <div class="gl-item"><div class="gl-term">Clamp-on Ammeter</div><div class="gl-def">Measures current via the magnetic field around one conductor. No circuit interruption needed. Clamp around ONE wire only — clamping both cancels the reading.</div></div>
+        <div class="gl-item"><div class="gl-term">Ohmmeter / DMM</div><div class="gl-def">Measures resistance. Circuit MUST be de-energized first. OL or ∞ = open circuit (broken). 0Ω = short or closed switch. External voltage will damage the meter.</div></div>
+        <div class="gl-item"><div class="gl-term">Megohmmeter (Megger)</div><div class="gl-def">Tests insulation resistance by applying 500–2,500V. Reads in megohms (MΩ). Below 1 MΩ = failed insulation. Always ground the cable after testing — stored charge can shock you.</div></div>
+        <div class="gl-item"><div class="gl-term">Tachometer</div><div class="gl-def">Measures rotational speed directly in RPM. Contact type touches the shaft end; optical type uses a reflective strip without contact. Used to verify a motor runs at its rated speed.</div></div>
+        <div class="gl-item"><div class="gl-term">Hydrometer</div><div class="gl-def">Measures specific gravity of battery electrolyte. Fully charged: ~1.265. Discharged: ~1.120. The definitive tool for checking a lead-acid battery's state of charge.</div></div>
+        <div class="gl-item"><div class="gl-term">Wattmeter</div><div class="gl-def">Measures electrical power in watts. Connects with both a voltage coil (in parallel) and a current coil (in series). Used on 3-phase circuits to measure total power draw.</div></div>
+        <div class="gl-item"><div class="gl-term">Oscilloscope</div><div class="gl-def">Displays electrical waveforms — voltage plotted over time. Used to observe AC wave shape, frequency, and peak voltage. Essential for troubleshooting electronic circuits.</div></div>
+        <div class="gl-item"><div class="gl-term">Non-Contact Tester</div><div class="gl-def">Detects AC voltage presence without touching conductors — senses the electromagnetic field. Quick first safety check only; verify with a meter for actual readings.</div></div>
+      </div>
+
+      <div class="gl-section">
+        <div class="gl-section-title">🔧 Tools</div>
+        <div class="gl-item"><div class="gl-term">Fish Tape</div><div class="gl-def">Steel or fiberglass tape threaded through conduit to pull wire. Use fiberglass in energized conduit — steel conducts electricity. Use wire pulling lubricant on long runs.</div></div>
+        <div class="gl-item"><div class="gl-term">Conduit Bender</div><div class="gl-def">Bends EMT, IMC, or rigid conduit. Match the bender shoe size exactly to the conduit size. Angle markings on the bender guide 90°, 45°, and back-to-back bends.</div></div>
+        <div class="gl-item"><div class="gl-term">Knockout Punch</div><div class="gl-def">Creates clean circular holes in metal panels and enclosures. Uses hydraulic or threaded force to punch through without distorting surrounding metal. Size must match conduit diameter.</div></div>
+        <div class="gl-item"><div class="gl-term">Hydraulic Crimper</div><div class="gl-def">Permanently connects cable lugs to large conductors. Required for power cable terminations — wire nuts are only for smaller conductors. Creates a gas-tight, high-current connection.</div></div>
+        <div class="gl-item"><div class="gl-term">Wire Stripper</div><div class="gl-def">Removes insulation without nicking the conductor. Each notch is sized for a specific gauge. Match the notch to the wire gauge — a wrong size will nick or fail to cut cleanly.</div></div>
+        <div class="gl-item"><div class="gl-term">Lineman's Pliers</div><div class="gl-def">The all-purpose heavy-duty electrical hand tool. Cuts wire, twists wire nut connections, grips conductors. Also called side-cutting pliers. Standard in every electrician's belt.</div></div>
+        <div class="gl-item"><div class="gl-term">Torque Screwdriver</div><div class="gl-def">Tightens terminals to a manufacturer-specified torque value. Prevents loose connections (fire hazard) and over-tightening (cracks terminals). Required by NEC for breaker terminals.</div></div>
+        <div class="gl-item"><div class="gl-term">Fuse Puller</div><div class="gl-def">Safely removes cartridge fuses from energized fuse clips without hand contact. Keeps fingers away from exposed live metal. Never remove a live cartridge fuse by hand.</div></div>
+        <div class="gl-item"><div class="gl-term">Reamer</div><div class="gl-def">Removes the sharp internal burr left after cutting conduit. The burr can cut through wire insulation during pulling. Always ream before pulling any conductors — NEC required.</div></div>
+        <div class="gl-item"><div class="gl-term">Knockout Punch</div><div class="gl-def">Creates clean circular holes in metal enclosures for conduit entry. Size-specific — must match conduit trade size. Cleaner result than a hole saw on sheet metal.</div></div>
+      </div>
+
+      <div class="gl-section">
+        <div class="gl-section-title">⚙️ Motor Terms</div>
+        <div class="gl-item"><div class="gl-term">FLA</div><div class="gl-def">Full Load Amps — the current the motor draws when running at its rated horsepower. The key nameplate value for sizing conductors, overload relays, and breakers.</div></div>
+        <div class="gl-item"><div class="gl-term">Service Factor (SF)</div><div class="gl-def">Overload capacity multiplier. SF 1.15 means the motor can run continuously at 115% of rated HP without damage. Built-in headroom for occasional extra demand.</div></div>
+        <div class="gl-item"><div class="gl-term">Insulation Class</div><div class="gl-def">Temperature rating of motor windings. Class A = 105°C, B = 130°C, F = 155°C, H = 180°C. Higher class = more heat resistant. Match to the motor's operating environment.</div></div>
+        <div class="gl-item"><div class="gl-term">Overload Relay</div><div class="gl-def">Protects motor windings from sustained overcurrent and heat. Trips before windings burn out. Separate from the circuit breaker, which protects the wiring. Both are required.</div></div>
+        <div class="gl-item"><div class="gl-term">Commutator</div><div class="gl-def">The rotating switching device in DC motors that transfers current to the armature windings via carbon brushes. Inspect for discoloration, uneven wear, and sparking during operation.</div></div>
+        <div class="gl-item"><div class="gl-term">Carbon Brushes</div><div class="gl-def">Stationary carbon contacts that ride on the commutator and carry current to the rotating armature. Should exert ~1.5 lbs/sq inch pressure. Worn or loose brushes cause sparking.</div></div>
+        <div class="gl-item"><div class="gl-term">Squirrel-Cage Motor</div><div class="gl-def">The most common AC induction motor. Has no commutator, slip rings, or brushes — current is induced magnetically into the rotor. Rugged, low maintenance, widely used in industry.</div></div>
+        <div class="gl-item"><div class="gl-term">Inrush Current</div><div class="gl-def">The starting current surge, typically 6–8× the FLA, lasting a fraction of a second. The reason motor circuits use time-delay fuses and breakers — standard types would trip on startup.</div></div>
+        <div class="gl-item"><div class="gl-term">Shunt Winding</div><div class="gl-def">DC motor field winding connected in parallel with the armature. Many turns of fine wire = high resistance. Limits its own current. A shorted shunt winding causes dangerous overspeed.</div></div>
+        <div class="gl-item"><div class="gl-term">Series Winding</div><div class="gl-def">DC motor field winding in series with the armature. Few turns of heavy wire = low resistance. Carries full armature current. Provides high starting torque. Used in compound motors.</div></div>
+        <div class="gl-item"><div class="gl-term">NEMA Starter</div><div class="gl-def">A motor controller combining a contactor (the switch) and an overload relay (the protection) in one unit. Sized by NEMA rating (0–9) based on motor HP and voltage.</div></div>
+        <div class="gl-item"><div class="gl-term">Synchronous Speed</div><div class="gl-def">The theoretical speed of an AC motor's rotating magnetic field: 120 × frequency ÷ number of poles. A 4-pole motor at 60Hz has a sync speed of 1,800 RPM.</div></div>
+      </div>
+
+    </div>
+  </div><!-- end panel-glossary -->
+
+  </div><!-- end fs-body wrapper -->
+</div>
+
+<div id="results" class="screen">
+  <div class="results-header">
+    <div class="results-score-ring" id="score-ring">
+      <div class="score-fraction" id="score-fraction">0/10</div>
+      <div class="score-pct" id="score-pct">0%</div>
+    </div>
+    <div class="results-verdict" id="results-verdict">Results</div>
+    <div class="results-sub" id="results-sub"></div>
+  </div>
+  <div class="category-breakdown">
+    <div class="breakdown-title">Category Breakdown</div>
+    <div id="breakdown-rows"></div>
+  </div>
+  <div class="results-actions">
+    <button class="btn-review" onclick="showReview('wrong')">📋 Review Wrong Answers</button>
+    <button class="btn-review" onclick="showReview('flagged')" id="btn-flagged" style="display:none">🚩 Flagged Questions</button>
+    <button class="btn-review" onclick="showScreen('formula-sheet')" id="fs-from-results">📐 Open Formula Sheet</button>
+    <button class="btn-home-res" onclick="showScreen('home')">⚡ Back to Home</button>
+  </div>
+</div>
+
+<div id="review" class="screen">
+  <div class="review-header">
+    <button class="btn-back" onclick="showScreen('results')" style="margin:0;padding:7px 14px;">←</button>
+    <div class="review-title" id="review-title">Wrong Answers</div>
+  </div>
+  <div class="review-body" id="review-body"></div>
+</div>
+
+<div id="tapout-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div class="modal-icon">✋</div>
+    <div class="modal-title">Tap Out?</div>
+    <div class="modal-desc">You've answered <span id="tapout-count">0</span> questions. End now and see your results?</div>
+    <div class="modal-actions">
+      <button class="modal-btn-confirm" onclick="confirmTapOut()">Yes, Show Results</button>
+      <button class="modal-btn-cancel" onclick="closeTapOut()">Keep Going</button>
+    </div>
+  </div>
+</div>
+<script>
+// PASSAGES
+const PASSAGES = {
+  p1: {
+    title: "Lockout/Tagout Safety Procedure",
+    text: "Before any electrical maintenance work begins, workers must follow the Lockout/Tagout (LOTO) procedure. First, notify all affected employees. Second, identify all energy sources — electrical, pneumatic, hydraulic, or mechanical. Third, shut down the equipment using the normal stopping procedure. Fourth, isolate the equipment by opening the main disconnect switch or circuit breaker. Fifth, apply your personal lock and tag to the energy-isolating device. Sixth, release or restrain all stored energy (discharge capacitors, release springs, drain pressure). Finally, verify that the equipment is de-energized by attempting to start it and using a meter to confirm zero energy. Only the worker who applied the lock may remove it."
+  },
+  p2: {
+    title: "NEC Working Clearances",
+    text: "The National Electrical Code (NEC) Article 110 requires specific minimum working clearances in front of electrical equipment. For equipment operating at 0 to 150 volts to ground, the minimum depth of clear working space is 3 feet. For equipment operating at 151 to 600 volts to ground, the minimum is 3.5 feet. For equipment above 600 volts, the minimum is 4 feet or more depending on conditions. The working space must be at least 30 inches wide, or the width of the equipment — whichever is greater. Minimum headroom in electrical rooms is 6.5 feet. This space must be kept clear at all times and cannot be used for storage. Adequate lighting must be provided, and the dedicated space above the panel to the structural ceiling must be kept free of all foreign systems including pipes and ductwork."
+  },
+  p3: {
+    title: "Motor Nameplate Information",
+    text: "Every electric motor has a nameplate that contains critical operating information. The voltage rating indicates the supply voltage the motor is designed to operate on — common values are 115V, 208V, 230V, or 460V. The Full Load Amps (FLA) rating shows the current the motor draws when operating at full rated load — this is used to size overload protection and conductors. The horsepower (HP) rating indicates the mechanical output power. The RPM rating shows the synchronous or rated speed. The service factor (SF) indicates how much overload the motor can handle continuously — a SF of 1.15 means the motor can run at 115% of its rated load indefinitely. The duty cycle indicates whether operation is continuous or intermittent. The insulation class (A, B, F, or H) indicates the motor's temperature rating. Always match replacement motors to the original nameplate specifications."
+  },
+  p4: {
+    title: "Subway Power Supply Information",
+    text: "The subway train signal system derives its power from a 3-phase, 4-wire, 60-cycle a.c. source which has a phase to phase voltage of 208 volts and a voltage of 120 volts between each phase wire and the grounded neutral. The signal system power is taken from one phase wire and the grounded neutral and applied to the primary of a 1 to 1 transformer. The secondary powers the signal main. Train propulsion power is 600 volts supplied from mercury arc rectifiers and fed to the 3rd rail, from which it is picked up by car contact shoes, taken through the car motors as required and returned through the car wheels and then through one of the running rails back to the power source. This rail, known as the negative propulsion current rail, has heavy bonds around each rail joint. The other running rail, known as the signal rail, has insulated rail joints at various intervals to separate one track signal circuit from another and the rail joints between insulated joints are bonded with relatively light bonds."
+  },
+  p5: {
+    title: "General Instructions for Weekly Motor Inspection",
+    text: "Inspect each motor to see if there is any unusual amount of dust or chips on or near it, and to see if there is anything left lying about which might interfere with the free running or ventilation of the motor. Check lubrication in accordance with standard instructions for the type of motor. At the same time, take notice of any unusual noise or odor for evidence of excessive wear or overloading; feel bearing housings for heat and vibration. Inspect the commutator of each d.c. motor for discoloration, dirt, and uneven wear; look for sparking at the brushes while the motor is running. Any minor defect should be corrected on the spot as soon as it is discovered, and the proper report made to your superior of the action taken. Any major defect that is found should be reported promptly to your superior so that it can be corrected before the damage becomes too great to be repaired."
+  }
+};
+
+const DIAGRAMS = {
+  d1: `<svg viewBox="0 0 380 200" width="360" height="190" xmlns="http://www.w3.org/2000/svg" font-family="'Barlow Condensed',Arial" style="background:#060f1e;border-radius:6px">
+  <text x="190" y="18" text-anchor="middle" fill="#f0a500" font-size="11" font-weight="700" letter-spacing="1">SERIES CIRCUIT — 120V DC</text>
+  <line x1="30" y1="40" x2="350" y2="40" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="30" y1="160" x2="350" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="30" y1="40" x2="30" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="350" y1="40" x2="350" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="30" cy="100" r="16" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="30" y="96" text-anchor="middle" fill="#f0a500" font-size="9" font-weight="700">120V</text>
+  <text x="30" y="107" text-anchor="middle" fill="#f0a500" font-size="8">DC</text>
+  <text x="30" y="130" text-anchor="middle" fill="#f0a500" font-size="10">+</text>
+  <text x="30" y="72" text-anchor="middle" fill="#8a9bb5" font-size="10">−</text>
+  <line x1="50" y1="40" x2="68" y2="40" stroke="#4a9eff" stroke-width="2.5"/>
+  <rect x="68" y="33" width="28" height="14" rx="3" fill="#0d1f3c" stroke="#ff3d3d" stroke-width="1.8"/>
+  <line x1="72" y1="40" x2="92" y2="40" stroke="#ff3d3d" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="96" y1="40" x2="116" y2="40" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="82" y="28" text-anchor="middle" fill="#ff3d3d" font-size="9" font-weight="700">FUSE</text>
+  <line x1="116" y1="40" x2="130" y2="40" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="130" cy="40" r="3" fill="#00c853"/>
+  <line x1="130" y1="40" x2="148" y2="28" stroke="#00c853" stroke-width="2" stroke-dasharray="4,2"/>
+  <circle cx="150" cy="40" r="3" fill="#00c853"/>
+  <line x1="150" y1="40" x2="165" y2="40" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="140" y="18" text-anchor="middle" fill="#00c853" font-size="10" font-weight="700">SW-W</text>
+  <line x1="165" y1="40" x2="178" y2="40" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="190" cy="40" r="12" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="190" y="44" text-anchor="middle" fill="#f0a500" font-size="11" font-weight="800">A</text>
+  <line x1="202" y1="40" x2="215" y2="40" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="190" y="66" text-anchor="middle" fill="#f0a500" font-size="9">AMMETER</text>
+  <line x1="350" y1="60" x2="350" y2="75" stroke="#4a9eff" stroke-width="2.5"/>
+  <rect x="338" y="75" width="24" height="50" rx="3" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="350" y="97" text-anchor="middle" fill="#f0a500" font-size="10" font-weight="700">R1</text>
+  <text x="350" y="110" text-anchor="middle" fill="#f0a500" font-size="10">10Ω</text>
+  <line x1="350" y1="125" x2="350" y2="140" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="215" y1="40" x2="260" y2="40" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="285" cy="40" r="16" fill="#0d1f3c" stroke="#ffbe3d" stroke-width="2"/>
+  <line x1="276" y1="31" x2="294" y2="49" stroke="#ffbe3d" stroke-width="1.5"/>
+  <line x1="294" y1="31" x2="276" y2="49" stroke="#ffbe3d" stroke-width="1.5"/>
+  <line x1="301" y1="40" x2="350" y2="40" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="285" y="70" text-anchor="middle" fill="#ffbe3d" font-size="9" font-weight="700">300W</text>
+  <text x="285" y="80" text-anchor="middle" fill="#ffbe3d" font-size="9">LAMP</text>
+  <line x1="180" y1="160" x2="200" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="220" cy="160" r="18" fill="#0d1f3c" stroke="#7c4dff" stroke-width="2"/>
+  <text x="220" y="156" text-anchor="middle" fill="#7c4dff" font-size="10" font-weight="800">M</text>
+  <text x="220" y="168" text-anchor="middle" fill="#7c4dff" font-size="8">120V</text>
+  <line x1="238" y1="160" x2="260" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="220" y="186" text-anchor="middle" fill="#7c4dff" font-size="9" font-weight="700">MOTOR</text>
+  <line x1="68" y1="160" x2="82" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="82" cy="160" r="3" fill="#00c853"/>
+  <line x1="82" y1="160" x2="100" y2="148" stroke="#00c853" stroke-width="2" stroke-dasharray="4,2"/>
+  <circle cx="102" cy="160" r="3" fill="#00c853"/>
+  <line x1="102" y1="160" x2="115" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="92" y="140" text-anchor="middle" fill="#00c853" font-size="10" font-weight="700">SW-X</text>
+  <text x="8" y="100" fill="#8a9bb5" font-size="9" transform="rotate(-90,8,100)" text-anchor="middle">120V</text>
+</svg>`,
+  d2: `<svg viewBox="0 0 380 210" width="360" height="200" xmlns="http://www.w3.org/2000/svg" font-family="'Barlow Condensed',Arial" style="background:#060f1e;border-radius:6px">
+  <text x="190" y="16" text-anchor="middle" fill="#f0a500" font-size="11" font-weight="700" letter-spacing="1">PARALLEL CIRCUIT — 120V</text>
+  <line x1="30" y1="35" x2="30" y2="85" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="30" cy="100" r="16" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="30" y="96" text-anchor="middle" fill="#f0a500" font-size="9" font-weight="700">120V</text>
+  <text x="30" y="107" text-anchor="middle" fill="#f0a500" font-size="8">AC</text>
+  <line x1="30" y1="115" x2="30" y2="175" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="30" y1="35" x2="340" y2="35" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="30" y1="175" x2="340" y2="175" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="100" y1="35" x2="100" y2="60" stroke="#4a9eff" stroke-width="2"/>
+  <rect x="88" y="60" width="24" height="55" rx="3" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="100" y="82" text-anchor="middle" fill="#f0a500" font-size="10" font-weight="700">R1</text>
+  <text x="100" y="96" text-anchor="middle" fill="#f0a500" font-size="10">10Ω</text>
+  <line x1="100" y1="115" x2="100" y2="175" stroke="#4a9eff" stroke-width="2"/>
+  <text x="100" y="195" text-anchor="middle" fill="#8a9bb5" font-size="9">I₁=12A</text>
+  <line x1="190" y1="35" x2="190" y2="60" stroke="#4a9eff" stroke-width="2"/>
+  <rect x="178" y="60" width="24" height="55" rx="3" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="190" y="82" text-anchor="middle" fill="#f0a500" font-size="10" font-weight="700">R2</text>
+  <text x="190" y="96" text-anchor="middle" fill="#f0a500" font-size="10">20Ω</text>
+  <line x1="190" y1="115" x2="190" y2="175" stroke="#4a9eff" stroke-width="2"/>
+  <text x="190" y="195" text-anchor="middle" fill="#8a9bb5" font-size="9">I₂=6A</text>
+  <line x1="280" y1="35" x2="280" y2="60" stroke="#4a9eff" stroke-width="2"/>
+  <rect x="268" y="60" width="24" height="55" rx="3" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="280" y="82" text-anchor="middle" fill="#f0a500" font-size="10" font-weight="700">R3</text>
+  <text x="280" y="96" text-anchor="middle" fill="#f0a500" font-size="10">30Ω</text>
+  <line x1="280" y1="115" x2="280" y2="175" stroke="#4a9eff" stroke-width="2"/>
+  <text x="280" y="195" text-anchor="middle" fill="#8a9bb5" font-size="9">I₃=4A</text>
+  <text x="65" y="28" text-anchor="middle" fill="#00c853" font-size="14">→</text>
+  <text x="145" y="28" text-anchor="middle" fill="#00c853" font-size="10">→</text>
+  <text x="235" y="28" text-anchor="middle" fill="#00c853" font-size="10">→</text>
+  <text x="58" y="52" fill="#00c853" font-size="9" font-weight="700">IT=22A</text>
+  <text x="358" y="108" text-anchor="middle" fill="#f0a500" font-size="9">120V</text>
+  <line x1="338" y1="35" x2="338" y2="175" stroke="#f0a500" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="338" y="30" text-anchor="middle" fill="#f0a500" font-size="9">+</text>
+  <text x="338" y="185" text-anchor="middle" fill="#8a9bb5" font-size="9">−</text>
+  <text x="190" y="205" text-anchor="middle" fill="#8a9bb5" font-size="8">Same voltage across all branches. Currents add: IT = I₁+I₂+I₃</text>
+</svg>`,
+  d3: `<svg viewBox="0 0 380 230" width="360" height="220" xmlns="http://www.w3.org/2000/svg" font-family="'Barlow Condensed',Arial" style="background:#060f1e;border-radius:6px">
+  <text x="190" y="16" text-anchor="middle" fill="#f0a500" font-size="11" font-weight="700" letter-spacing="1">SWITCH LOGIC CIRCUIT — 120V</text>
+  <text x="190" y="28" text-anchor="middle" fill="#8a9bb5" font-size="9">All switches initially OPEN</text>
+  <line x1="25" y1="50" x2="25" y2="80" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="25" cy="95" r="14" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="25" y="91" text-anchor="middle" fill="#f0a500" font-size="8" font-weight="700">120V</text>
+  <text x="25" y="101" text-anchor="middle" fill="#f0a500" font-size="7">DC</text>
+  <line x1="25" y1="109" x2="25" y2="180" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="25" y1="50" x2="355" y2="50" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="25" y1="180" x2="355" y2="180" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="55" y1="50" x2="70" y2="50" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="70" cy="50" r="3.5" fill="#00c853"/>
+  <line x1="70" y1="50" x2="90" y2="38" stroke="#00c853" stroke-width="2" stroke-dasharray="5,2"/>
+  <circle cx="92" cy="50" r="3.5" fill="#00c853"/>
+  <line x1="92" y1="50" x2="108" y2="50" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="81" y="30" text-anchor="middle" fill="#00c853" font-size="11" font-weight="800">X</text>
+  <line x1="108" y1="50" x2="128" y2="50" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="128" cy="50" r="3.5" fill="#00c853"/>
+  <line x1="128" y1="50" x2="148" y2="38" stroke="#00c853" stroke-width="2" stroke-dasharray="5,2"/>
+  <circle cx="150" cy="50" r="3.5" fill="#00c853"/>
+  <line x1="150" y1="50" x2="170" y2="50" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="139" y="30" text-anchor="middle" fill="#00c853" font-size="11" font-weight="800">Y</text>
+  <circle cx="190" cy="50" r="4" fill="#4a9eff"/>
+  <line x1="190" y1="50" x2="190" y2="80" stroke="#4a9eff" stroke-width="2"/>
+  <circle cx="190" cy="80" r="3.5" fill="#00c853"/>
+  <line x1="190" y1="80" x2="202" y2="95" stroke="#00c853" stroke-width="2" stroke-dasharray="5,2"/>
+  <circle cx="190" cy="110" r="3.5" fill="#00c853"/>
+  <line x1="190" y1="110" x2="190" y2="180" stroke="#4a9eff" stroke-width="2"/>
+  <circle cx="190" cy="180" r="4" fill="#4a9eff"/>
+  <text x="212" y="100" fill="#00c853" font-size="11" font-weight="800">Z</text>
+  <line x1="190" y1="50" x2="240" y2="50" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="240" cy="50" r="3.5" fill="#00c853"/>
+  <line x1="240" y1="50" x2="260" y2="38" stroke="#00c853" stroke-width="2" stroke-dasharray="5,2"/>
+  <circle cx="262" cy="50" r="3.5" fill="#00c853"/>
+  <line x1="262" y1="50" x2="280" y2="50" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="251" y="30" text-anchor="middle" fill="#00c853" font-size="11" font-weight="800">W</text>
+  <line x1="280" y1="50" x2="295" y2="50" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="310" cy="50" r="16" fill="#0d1f3c" stroke="#ffbe3d" stroke-width="2"/>
+  <line x1="301" y1="41" x2="319" y2="59" stroke="#ffbe3d" stroke-width="1.5"/>
+  <line x1="319" y1="41" x2="301" y2="59" stroke="#ffbe3d" stroke-width="1.5"/>
+  <line x1="326" y1="50" x2="355" y2="50" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="310" y="80" text-anchor="middle" fill="#ffbe3d" font-size="9" font-weight="700">300W</text>
+  <text x="310" y="91" text-anchor="middle" fill="#ffbe3d" font-size="9">LAMP</text>
+  <line x1="355" y1="50" x2="355" y2="100" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="355" cy="118" r="18" fill="#0d1f3c" stroke="#7c4dff" stroke-width="2"/>
+  <text x="355" y="114" text-anchor="middle" fill="#7c4dff" font-size="11" font-weight="800">M</text>
+  <text x="355" y="126" text-anchor="middle" fill="#7c4dff" font-size="8">4A</text>
+  <line x1="355" y1="136" x2="355" y2="180" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="355" y="200" text-anchor="middle" fill="#7c4dff" font-size="9" font-weight="700">MOTOR</text>
+  <line x1="80" y1="180" x2="90" y2="180" stroke="#4a9eff" stroke-width="2.5"/>
+  <rect x="90" y="173" width="36" height="14" rx="3" fill="#0d1f3c" stroke="#ff3d3d" stroke-width="2"/>
+  <line x1="94" y1="180" x2="122" y2="180" stroke="#ff3d3d" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="108" y="167" text-anchor="middle" fill="#ff3d3d" font-size="9" font-weight="700">FUSE</text>
+  <line x1="126" y1="180" x2="145" y2="180" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="25" y="218" fill="#c0d0e0" font-size="10">X, Y, W, Z = switches  |  Lamp &amp; Motor = loads  |  FUSE protects main line</text>
+</svg>`,
+  d4: `<svg viewBox="0 0 380 200" width="360" height="190" xmlns="http://www.w3.org/2000/svg" font-family="'Barlow Condensed',Arial" style="background:#060f1e;border-radius:6px">
+  <text x="190" y="16" text-anchor="middle" fill="#f0a500" font-size="11" font-weight="700" letter-spacing="1">RELAY CONTROL CIRCUIT</text>
+  <text x="95" y="35" text-anchor="middle" fill="#8a9bb5" font-size="9" font-weight="700">CONTROL CIRCUIT</text>
+  <line x1="20" y1="45" x2="170" y2="45" stroke="#4a9eff" stroke-width="2"/>
+  <line x1="20" y1="160" x2="170" y2="160" stroke="#4a9eff" stroke-width="2"/>
+  <line x1="20" y1="45" x2="20" y2="160" stroke="#4a9eff" stroke-width="2"/>
+  <line x1="20" y1="80" x2="20" y2="90" stroke="#4a9eff" stroke-width="2"/>
+  <line x1="12" y1="90" x2="28" y2="90" stroke="#f0a500" stroke-width="3"/>
+  <line x1="15" y1="97" x2="25" y2="97" stroke="#f0a500" stroke-width="1.5"/>
+  <line x1="12" y1="104" x2="28" y2="104" stroke="#f0a500" stroke-width="3"/>
+  <line x1="15" y1="111" x2="25" y2="111" stroke="#f0a500" stroke-width="1.5"/>
+  <line x1="20" y1="111" x2="20" y2="120" stroke="#4a9eff" stroke-width="2"/>
+  <text x="38" y="103" fill="#f0a500" font-size="10" font-weight="700">6V</text>
+  <line x1="40" y1="45" x2="55" y2="45" stroke="#4a9eff" stroke-width="2"/>
+  <circle cx="55" cy="45" r="3" fill="#00c853"/>
+  <line x1="55" y1="45" x2="72" y2="34" stroke="#00c853" stroke-width="2" stroke-dasharray="4,2"/>
+  <circle cx="74" cy="45" r="3" fill="#00c853"/>
+  <line x1="74" y1="45" x2="90" y2="45" stroke="#4a9eff" stroke-width="2"/>
+  <text x="64" y="25" text-anchor="middle" fill="#00c853" font-size="9" font-weight="700">SW-CTRL</text>
+  <line x1="115" y1="45" x2="115" y2="60" stroke="#4a9eff" stroke-width="2"/>
+  <rect x="103" y="60" width="24" height="40" rx="4" fill="#0d1f3c" stroke="#7c4dff" stroke-width="2"/>
+  <text x="115" y="76" text-anchor="middle" fill="#7c4dff" font-size="9" font-weight="700">COIL</text>
+  <text x="115" y="89" text-anchor="middle" fill="#7c4dff" font-size="8">30Ω</text>
+  <line x1="115" y1="100" x2="115" y2="115" stroke="#4a9eff" stroke-width="2"/>
+  <text x="140" y="85" fill="#7c4dff" font-size="18">⟳</text>
+  <text x="138" y="110" fill="#8a9bb5" font-size="8">RELAY</text>
+  <line x1="175" y1="30" x2="175" y2="175" stroke="#1e3a5f" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="275" y="35" text-anchor="middle" fill="#8a9bb5" font-size="9" font-weight="700">POWER CIRCUIT</text>
+  <line x1="190" y1="45" x2="360" y2="45" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="190" y1="160" x2="360" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="360" y1="45" x2="360" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="190" y1="45" x2="190" y2="85" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="190" cy="100" r="14" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="190" y="96" text-anchor="middle" fill="#f0a500" font-size="8" font-weight="700">120V</text>
+  <text x="190" y="107" text-anchor="middle" fill="#f0a500" font-size="7">AC</text>
+  <line x1="190" y1="114" x2="190" y2="160" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="220" y1="45" x2="235" y2="45" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="235" cy="45" r="3.5" fill="#ff3d3d"/>
+  <line x1="235" y1="45" x2="253" y2="33" stroke="#ff3d3d" stroke-width="2" stroke-dasharray="4,2"/>
+  <circle cx="255" cy="45" r="3.5" fill="#ff3d3d"/>
+  <line x1="255" y1="45" x2="275" y2="45" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="245" y="25" text-anchor="middle" fill="#ff3d3d" font-size="9" font-weight="700">K1 (NO)</text>
+  <circle cx="320" cy="45" r="15" fill="#0d1f3c" stroke="#ffbe3d" stroke-width="2"/>
+  <line x1="311" y1="36" x2="329" y2="54" stroke="#ffbe3d" stroke-width="1.5"/>
+  <line x1="329" y1="36" x2="311" y2="54" stroke="#ffbe3d" stroke-width="1.5"/>
+  <text x="320" y="74" text-anchor="middle" fill="#ffbe3d" font-size="9" font-weight="700">LAMP</text>
+  <text x="320" y="85" text-anchor="middle" fill="#ffbe3d" font-size="8">120V</text>
+  <path d="M 140 80 Q 165 80 180 60" stroke="#7c4dff" stroke-width="1" fill="none" stroke-dasharray="3,3"/>
+  <text x="155" y="130" text-anchor="middle" fill="#8a9bb5" font-size="8">Coil energized</text>
+  <text x="155" y="141" text-anchor="middle" fill="#8a9bb5" font-size="8">→ K1 closes</text>
+</svg>`,
+  d5: `<svg viewBox="0 0 380 200" width="360" height="190" xmlns="http://www.w3.org/2000/svg" font-family="'Barlow Condensed',Arial" style="background:#060f1e;border-radius:6px">
+  <text x="190" y="16" text-anchor="middle" fill="#f0a500" font-size="11" font-weight="700" letter-spacing="1">STEP-DOWN TRANSFORMER</text>
+  <text x="90" y="35" text-anchor="middle" fill="#8a9bb5" font-size="9">PRIMARY</text>
+  <circle cx="30" cy="105" r="16" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="30" y="100" text-anchor="middle" fill="#f0a500" font-size="9" font-weight="700">480V</text>
+  <text x="30" y="112" text-anchor="middle" fill="#f0a500" font-size="8">AC</text>
+  <line x1="46" y1="100" x2="80" y2="100" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="46" y1="110" x2="80" y2="110" stroke="#4a9eff" stroke-width="2.5"/>
+  <path d="M80,105 Q85,88 90,105 Q95,88 100,105 Q105,88 110,105 Q115,88 120,105 Q125,88 130,105 Q135,88 140,105 Q145,88 150,105" stroke="#4a9eff" stroke-width="2" fill="none"/>
+  <line x1="80" y1="105" x2="80" y2="110" stroke="#4a9eff" stroke-width="2"/>
+  <line x1="150" y1="105" x2="150" y2="110" stroke="#4a9eff" stroke-width="2"/>
+  <text x="115" y="75" text-anchor="middle" fill="#4a9eff" font-size="9" font-weight="700">N1 = 500 turns</text>
+  <rect x="155" y="78" width="16" height="44" rx="2" fill="#2a4a7a" stroke="#8a9bb5" stroke-width="1.5"/>
+  <text x="163" y="106" text-anchor="middle" fill="#8a9bb5" font-size="7" transform="rotate(-90,163,103)">CORE</text>
+  <path d="M175,105 Q180,88 185,105 Q190,88 195,105 Q200,88 205,105 Q210,88 215,105" stroke="#00c853" stroke-width="2" fill="none"/>
+  <line x1="175" y1="105" x2="175" y2="110" stroke="#00c853" stroke-width="2"/>
+  <line x1="215" y1="105" x2="215" y2="110" stroke="#00c853" stroke-width="2"/>
+  <text x="195" y="75" text-anchor="middle" fill="#00c853" font-size="9" font-weight="700">N2 = 100 turns</text>
+  <text x="190" y="35" text-anchor="middle" fill="#8a9bb5" font-size="9">SECONDARY</text>
+  <line x1="215" y1="100" x2="260" y2="100" stroke="#00c853" stroke-width="2.5"/>
+  <line x1="215" y1="110" x2="260" y2="110" stroke="#00c853" stroke-width="2.5"/>
+  <rect x="260" y="92" width="40" height="26" rx="4" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="280" y="104" text-anchor="middle" fill="#f0a500" font-size="10" font-weight="700">LOAD</text>
+  <text x="280" y="115" text-anchor="middle" fill="#f0a500" font-size="9">? V</text>
+  <line x1="300" y1="100" x2="340" y2="100" stroke="#00c853" stroke-width="2.5"/>
+  <line x1="300" y1="110" x2="340" y2="110" stroke="#00c853" stroke-width="2.5"/>
+  <line x1="340" y1="100" x2="340" y2="150" stroke="#00c853" stroke-width="2"/>
+  <line x1="30" y1="120" x2="30" y2="150" stroke="#4a9eff" stroke-width="2"/>
+  <line x1="30" y1="150" x2="340" y2="150" stroke="#8a9bb5" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="190" y="170" text-anchor="middle" fill="#f0a500" font-size="11" font-weight="700">V1/V2 = N1/N2</text>
+  <text x="190" y="185" text-anchor="middle" fill="#8a9bb5" font-size="9">480/V2 = 500/100  →  V2 = ?</text>
+  <text x="358" y="100" fill="#ff3d3d" font-size="18">↓</text>
+  <text x="354" y="116" fill="#ff3d3d" font-size="8">STEP</text>
+  <text x="354" y="126" fill="#ff3d3d" font-size="8">DOWN</text>
+</svg>`,
+  d6: `<svg viewBox="0 0 380 210" width="360" height="200" xmlns="http://www.w3.org/2000/svg" font-family="'Barlow Condensed',Arial" style="background:#060f1e;border-radius:6px">
+  <text x="190" y="16" text-anchor="middle" fill="#f0a500" font-size="11" font-weight="700" letter-spacing="1">SUBWAY POWER SUPPLY SYSTEM</text>
+  <rect x="8" y="28" width="52" height="50" rx="4" fill="#0d1f3c" stroke="#4a9eff" stroke-width="2"/>
+  <text x="34" y="46" text-anchor="middle" fill="#4a9eff" font-size="8" font-weight="700">3-PHASE</text>
+  <text x="34" y="57" text-anchor="middle" fill="#4a9eff" font-size="8">208V AC</text>
+  <text x="34" y="67" text-anchor="middle" fill="#4a9eff" font-size="8">60 Hz</text>
+  <text x="34" y="90" text-anchor="middle" fill="#8a9bb5" font-size="8">UTILITY</text>
+  <line x1="60" y1="53" x2="82" y2="53" stroke="#4a9eff" stroke-width="2"/>
+  <polygon points="80,48 90,53 80,58" fill="#4a9eff"/>
+  <rect x="90" y="35" width="50" height="36" rx="4" fill="#0d1f3c" stroke="#7c4dff" stroke-width="2"/>
+  <text x="115" y="52" text-anchor="middle" fill="#7c4dff" font-size="9" font-weight="700">1:1</text>
+  <text x="115" y="63" text-anchor="middle" fill="#7c4dff" font-size="8">XFMR</text>
+  <text x="115" y="82" text-anchor="middle" fill="#8a9bb5" font-size="8">120V AC</text>
+  <line x1="140" y1="53" x2="162" y2="53" stroke="#7c4dff" stroke-width="2"/>
+  <polygon points="160,48 170,53 160,58" fill="#7c4dff"/>
+  <rect x="170" y="35" width="52" height="36" rx="4" fill="#0d1f3c" stroke="#00c853" stroke-width="2"/>
+  <text x="196" y="50" text-anchor="middle" fill="#00c853" font-size="8" font-weight="700">SIGNAL</text>
+  <text x="196" y="61" text-anchor="middle" fill="#00c853" font-size="8">MAIN</text>
+  <text x="196" y="82" text-anchor="middle" fill="#8a9bb5" font-size="8">120V AC</text>
+  <line x1="34" y1="78" x2="34" y2="120" stroke="#4a9eff" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="34" y1="120" x2="260" y2="120" stroke="#4a9eff" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="260" y1="120" x2="260" y2="140" stroke="#4a9eff" stroke-width="2" stroke-dasharray="4,3"/>
+  <rect x="232" y="140" width="56" height="36" rx="4" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="260" y="156" text-anchor="middle" fill="#f0a500" font-size="8" font-weight="700">RECTIFIER</text>
+  <text x="260" y="167" text-anchor="middle" fill="#f0a500" font-size="8">AC → DC</text>
+  <line x1="288" y1="158" x2="318" y2="158" stroke="#f0a500" stroke-width="2"/>
+  <polygon points="316,153 326,158 316,163" fill="#f0a500"/>
+  <rect x="326" y="140" width="48" height="36" rx="4" fill="#0d1f3c" stroke="#ff3d3d" stroke-width="2.5"/>
+  <text x="350" y="155" text-anchor="middle" fill="#ff3d3d" font-size="8" font-weight="700">3RD RAIL</text>
+  <text x="350" y="166" text-anchor="middle" fill="#ff3d3d" font-size="9" font-weight="700">600V DC</text>
+  <text x="350" y="188" text-anchor="middle" fill="#ff3d3d" font-size="8">⚠ DANGER</text>
+  <rect x="310" y="195" width="80" height="15" rx="3" fill="#2a4a7a" stroke="#8a9bb5" stroke-width="1.5"/>
+  <text x="350" y="206" text-anchor="middle" fill="#8a9bb5" font-size="8">CONTACT SHOE</text>
+  <line x1="10" y1="200" x2="225" y2="200" stroke="#8a9bb5" stroke-width="3"/>
+  <text x="115" y="210" text-anchor="middle" fill="#8a9bb5" font-size="7">RETURN RAIL (−)</text>
+  <text x="72" y="45" fill="#4a9eff" font-size="8">208V</text>
+  <text x="148" y="45" fill="#7c4dff" font-size="8">120V</text>
+  <text x="228" y="45" fill="#00c853" font-size="8">120V</text>
+</svg>`,
+  d7: `<svg viewBox="0 0 380 210" width="360" height="200" xmlns="http://www.w3.org/2000/svg" font-family="'Barlow Condensed',Arial" style="background:#060f1e;border-radius:6px">
+  <text x="190" y="16" text-anchor="middle" fill="#f0a500" font-size="11" font-weight="700" letter-spacing="1">SERIES-PARALLEL COMBINATION</text>
+  <circle cx="28" cy="110" r="16" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="28" y="106" text-anchor="middle" fill="#f0a500" font-size="8" font-weight="700">120V</text>
+  <text x="28" y="117" text-anchor="middle" fill="#f0a500" font-size="7">DC</text>
+  <line x1="44" y1="105" x2="80" y2="105" stroke="#4a9eff" stroke-width="2.5"/>
+  <rect x="80" y="96" width="40" height="24" rx="3" fill="#0d1f3c" stroke="#f0a500" stroke-width="2"/>
+  <text x="100" y="108" text-anchor="middle" fill="#f0a500" font-size="10" font-weight="700">R1</text>
+  <text x="100" y="118" text-anchor="middle" fill="#f0a500" font-size="9">20Ω</text>
+  <line x1="120" y1="105" x2="160" y2="105" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="160" cy="105" r="5" fill="#ff3d3d"/>
+  <text x="160" y="92" text-anchor="middle" fill="#ff3d3d" font-size="10" font-weight="800">A</text>
+  <line x1="160" y1="105" x2="200" y2="105" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="200" y1="65" x2="200" y2="145" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="200" y1="65" x2="240" y2="65" stroke="#4a9eff" stroke-width="2"/>
+  <rect x="240" y="56" width="40" height="24" rx="3" fill="#0d1f3c" stroke="#00c853" stroke-width="2"/>
+  <text x="260" y="68" text-anchor="middle" fill="#00c853" font-size="10" font-weight="700">R2</text>
+  <text x="260" y="78" text-anchor="middle" fill="#00c853" font-size="9">30Ω</text>
+  <line x1="280" y1="65" x2="320" y2="65" stroke="#4a9eff" stroke-width="2"/>
+  <line x1="200" y1="145" x2="240" y2="145" stroke="#4a9eff" stroke-width="2"/>
+  <rect x="240" y="136" width="40" height="24" rx="3" fill="#0d1f3c" stroke="#00c853" stroke-width="2"/>
+  <text x="260" y="148" text-anchor="middle" fill="#00c853" font-size="10" font-weight="700">R3</text>
+  <text x="260" y="158" text-anchor="middle" fill="#00c853" font-size="9">30Ω</text>
+  <line x1="280" y1="145" x2="320" y2="145" stroke="#4a9eff" stroke-width="2"/>
+  <line x1="320" y1="65" x2="320" y2="145" stroke="#4a9eff" stroke-width="2.5"/>
+  <circle cx="320" cy="105" r="5" fill="#ff3d3d"/>
+  <text x="338" y="109" fill="#ff3d3d" font-size="10" font-weight="800">B</text>
+  <line x1="320" y1="105" x2="350" y2="105" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="44" y1="115" x2="350" y2="115" stroke="#4a9eff" stroke-width="2.5"/>
+  <line x1="350" y1="105" x2="350" y2="115" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="260" y="180" text-anchor="middle" fill="#8a9bb5" font-size="9">R2 ∥ R3 = 15Ω</text>
+  <text x="148" y="98" fill="#00c853" font-size="12">→</text>
+  <text x="338" y="58" fill="#00c853" font-size="10">↘</text>
+  <text x="338" y="138" fill="#00c853" font-size="10">↗</text>
+  <text x="100" y="140" text-anchor="middle" fill="#f0a500" font-size="8">Series section</text>
+  <text x="260" y="195" text-anchor="middle" fill="#8a9bb5" font-size="8">Parallel section → Total R = R1 + (R2∥R3) = 20+15 = 35Ω</text>
+  <text x="190" y="205" text-anchor="middle" fill="#8a9bb5" font-size="8">Points A and B = measure voltage across parallel bank</text>
+</svg>`
+};
+
+const QUESTIONS=[
+{id:1,cat:"Ohm's Law & Power",hint:"You need current. You have voltage and resistance.",q:"A circuit has 120V and 40Ω resistance. What is the current?",opts:["2 A","3 A","4 A","5 A"],ans:1,exp:"I = V ÷ R = 120 ÷ 40 = 3 A."},
+{id:2,cat:"Ohm's Law & Power",hint:"V = I × R.",q:"Current is 6A through a 20Ω resistor. What is the voltage?",opts:["60 V","100 V","120 V","200 V"],ans:2,exp:"V = I × R = 6 × 20 = 120 V."},
+{id:3,cat:"Ohm's Law & Power",hint:"R = V ÷ I.",q:"Voltage is 240V and current is 8A. What is the resistance?",opts:["20 Ω","25 Ω","30 Ω","40 Ω"],ans:2,exp:"R = V ÷ I = 240 ÷ 8 = 30 Ω."},
+{id:4,cat:"Ohm's Law & Power",hint:"I = P ÷ V.",q:"A 60W lamp runs on 120V. What current does it draw?",opts:["0.25 A","0.5 A","1.0 A","2.0 A"],ans:1,exp:"I = P ÷ V = 60 ÷ 120 = 0.5 A."},
+{id:5,cat:"Ohm's Law & Power",hint:"P = V × I.",q:"A heater draws 10A at 240V. What is its wattage?",opts:["1,200 W","1,800 W","2,400 W","3,000 W"],ans:2,exp:"P = V × I = 240 × 10 = 2,400 W."},
+{id:6,cat:"Ohm's Law & Power",hint:"P = I² × R. Square the current first.",q:"Current of 5A flows through 8Ω. How much power is consumed?",opts:["40 W","100 W","160 W","200 W"],ans:3,exp:"P = I² × R = 25 × 8 = 200 W."},
+{id:7,cat:"Ohm's Law & Power",hint:"I = P ÷ V.",q:"A motor uses 1,800W at 120V. What current does it draw?",opts:["10 A","12 A","15 A","18 A"],ans:2,exp:"I = P ÷ V = 1,800 ÷ 120 = 15 A."},
+{id:8,cat:"Ohm's Law & Power",hint:"I = √(P÷R).",q:"Power is 500W and resistance is 20Ω. What is the current?",opts:["3 A","4 A","5 A","6 A"],ans:2,exp:"I = √(500 ÷ 20) = √25 = 5 A."},
+{id:9,cat:"Ohm's Law & Power",hint:"R = V² ÷ P.",q:"A 100W lamp operates on 120V. What is its resistance?",opts:["120 Ω","144 Ω","160 Ω","200 Ω"],ans:1,exp:"R = V² ÷ P = 14,400 ÷ 100 = 144 Ω."},
+{id:10,cat:"Ohm's Law & Power",hint:"P = V² ÷ R.",q:"Voltage is 24V, resistance is 6Ω. What is the power consumed?",opts:["48 W","72 W","96 W","144 W"],ans:2,exp:"P = V² ÷ R = 576 ÷ 6 = 96 W."},
+{id:11,cat:"Ohm's Law & Power",hint:"V = I × R.",q:"A device has 4Ω resistance and draws 3A. What is the voltage?",opts:["7 V","9 V","12 V","16 V"],ans:2,exp:"V = I × R = 3 × 4 = 12 V."},
+{id:12,cat:"Ohm's Law & Power",hint:"V = P ÷ I.",q:"Power is 360W at 12A. What is the voltage?",opts:["20 V","25 V","30 V","36 V"],ans:2,exp:"V = P ÷ I = 360 ÷ 12 = 30 V."},
+{id:13,cat:"Ohm's Law & Power",hint:"Total watts = V × I, then divide by bulb wattage.",q:"How many 100W bulbs can a 20A/120V circuit support?",opts:["12","18","24","30"],ans:2,exp:"Total power = 20 × 120 = 2,400W. 2,400 ÷ 100 = 24 bulbs."},
+{id:14,cat:"Ohm's Law & Power",hint:"P = V × I.",q:"A resistor drops 48V with 4A flowing. How much power does it dissipate?",opts:["96 W","144 W","192 W","240 W"],ans:2,exp:"P = V × I = 48 × 4 = 192 W."},
+{id:15,cat:"Ohm's Law & Power",hint:"R = V ÷ I.",q:"A circuit draws 2A at 12V. What is the resistance?",opts:["4 Ω","6 Ω","8 Ω","10 Ω"],ans:1,exp:"R = V ÷ I = 12 ÷ 2 = 6 Ω."},
+{id:16,cat:"Ohm's Law & Power",hint:"Convert mA to A first (÷1000), then V = I × R.",q:"Convert 250 milliamps to amps, then find voltage across 80Ω.",opts:["5 V","10 V","20 V","25 V"],ans:2,exp:"250 mA = 0.25 A. V = 0.25 × 80 = 20 V."},
+{id:17,cat:"Ohm's Law & Power",hint:"R = V² ÷ P.",q:"A 1,500W electric heater runs on 120V. What is its resistance?",opts:["9.6 Ω","12 Ω","15 Ω","18 Ω"],ans:0,exp:"R = V² ÷ P = 14,400 ÷ 1,500 = 9.6 Ω."},
+{id:18,cat:"Ohm's Law & Power",hint:"If R doubles and V is fixed, what happens to I?",q:"If resistance doubles but voltage stays the same, current will:",opts:["Double","Stay the same","Halve","Quadruple"],ans:2,exp:"I = V/R. If R doubles, I halves."},
+{id:19,cat:"Ohm's Law & Power",hint:"P = V²/R. Voltage is squared.",q:"If voltage doubles but resistance stays the same, power will:",opts:["Double","Triple","Quadruple","Stay the same"],ans:2,exp:"P = V²/R. If V doubles, V² quadruples, so power quadruples."},
+{id:20,cat:"Ohm's Law & Power",hint:"Convert kW to W first (×1,000), then I = P ÷ V.",q:"A device consumes 3 kW at 240V. What current does it draw?",opts:["8.5 A","10 A","12.5 A","15 A"],ans:2,exp:"3 kW = 3,000 W. I = 3,000 ÷ 240 = 12.5 A."},
+{id:21,cat:"Series & Parallel",hint:"In series, resistances add.",q:"Three resistors in series: 10Ω, 20Ω, 30Ω. Total resistance?",opts:["20 Ω","40 Ω","60 Ω","120 Ω"],ans:2,exp:"10 + 20 + 30 = 60 Ω."},
+{id:22,cat:"Series & Parallel",hint:"Two equal resistors in parallel = R ÷ 2.",q:"Two 20Ω resistors in parallel. Total resistance?",opts:["5 Ω","10 Ω","20 Ω","40 Ω"],ans:1,exp:"R_T = R ÷ 2 = 10 Ω."},
+{id:23,cat:"Series & Parallel",hint:"Series = one path. Break it anywhere...",q:"In a series circuit, one lamp burns out. What happens to the others?",opts:["Burn brighter","Stay the same","All go out","Only adjacent lamps go out"],ans:2,exp:"Break anywhere in series = ALL current stops."},
+{id:24,cat:"Series & Parallel",hint:"Parallel branches are independent paths.",q:"In a parallel circuit, one lamp burns out. What happens to the others?",opts:["All go out","Burn brighter","Stay on normally","Dim slightly"],ans:1,exp:"Parallel branches are independent. Others keep their own current path."},
+{id:25,cat:"Series & Parallel",hint:"Add resistors for R_T, then I = V ÷ R.",q:"Series circuit: 120V supply, resistors 20Ω and 40Ω. What is current?",opts:["1 A","2 A","3 A","4 A"],ans:1,exp:"R_T = 60 Ω. I = 120 ÷ 60 = 2 A."},
+{id:26,cat:"Series & Parallel",hint:"R_T = R ÷ n for equal resistors.",q:"Three 30Ω resistors in parallel. Total resistance?",opts:["5 Ω","10 Ω","30 Ω","90 Ω"],ans:1,exp:"R_T = 30 ÷ 3 = 10 Ω."},
+{id:27,cat:"Series & Parallel",hint:"In series, voltage divides equally among identical loads.",q:"How many 120V bulbs can run in series on a 600V third rail?",opts:["3","4","5","6"],ans:2,exp:"600V ÷ 120V = 5 bulbs."},
+{id:28,cat:"Series & Parallel",hint:"KCL: parallel branch currents add.",q:"Two parallel branches: 2A and 5A. Total current from source?",opts:["2.5 A","3.5 A","5 A","7 A"],ans:3,exp:"2 + 5 = 7 A total."},
+{id:29,cat:"Series & Parallel",hint:"Add all resistors, then I = V ÷ R_T.",q:"Series circuit: 9V, resistors 1Ω + 2Ω + 6Ω. Current?",opts:["0.5 A","1 A","1.5 A","3 A"],ans:1,exp:"R_T = 9Ω. I = 9÷9 = 1 A."},
+{id:30,cat:"Series & Parallel",hint:"V = I × R. Use the 1A from Q29.",q:"Using Q29 circuit (1A through 1Ω+2Ω+6Ω), voltage drop across 6Ω?",opts:["2 V","4 V","6 V","9 V"],ans:2,exp:"V = 1 × 6 = 6 V."},
+{id:31,cat:"Series & Parallel",hint:"All branches connect between the same two nodes.",q:"Which is TRUE about parallel circuits?",opts:["Current same in all branches","Voltage same across all branches","R_T greater than any branch","Adding branches increases R_T"],ans:1,exp:"Same voltage everywhere in parallel. Current splits proportionally."},
+{id:32,cat:"Series & Parallel",hint:"More paths = less total opposition.",q:"Adding more resistors in parallel will:",opts:["Increase total resistance","Keep it the same","Decrease total resistance","Double total resistance"],ans:2,exp:"R_T is always less than the smallest individual branch."},
+{id:33,cat:"Series & Parallel",hint:"Equal resistors in series share voltage equally.",q:"In a series circuit with 3 equal 10Ω resistors on 30V, voltage across each?",opts:["3 V","5 V","10 V","30 V"],ans:2,exp:"I = 1A. Each drops 1×10 = 10V."},
+{id:34,cat:"Series & Parallel",hint:"A short = 0Ω. No voltage drop, but current increases.",q:"A short circuit develops across one resistor in a series circuit. What happens?",opts:["That resistor gets more voltage","All power goes to other resistors","Voltage across short = 0V, current increases","Circuit goes dead"],ans:2,exp:"0Ω path = no voltage drop. Current increases as remaining resistance is lower."},
+{id:35,cat:"Series & Parallel",hint:"Shorted parallel branch = 0Ω across full supply.",q:"A short circuit develops across one branch in a parallel circuit. What happens?",opts:["Only that branch loses power","Other branches unaffected","That branch draws maximum current, likely blowing a fuse","Voltage across all branches drops"],ans:2,exp:"Shorted branch draws massive current — should blow a fuse."},
+{id:36,cat:"Series & Parallel",hint:"All voltage 'piles up' at an open break.",q:"You measure voltage across an open switch in a series circuit. You read:",opts:["0V","Half supply voltage","Full supply voltage","Varies with resistance"],ans:2,exp:"Full supply voltage across the open gap."},
+{id:37,cat:"Series & Parallel",hint:"Higher branch resistance = less current in that branch.",q:"In a parallel circuit, if one branch resistance increases, what happens to total current?",opts:["Increases","Stays the same","Decreases slightly","Goes to zero"],ans:2,exp:"Total current decreases slightly. Other branches unchanged."},
+{id:38,cat:"Series & Parallel",hint:"(R1×R2)÷(R1+R2).",q:"Two resistors: 6Ω and 3Ω in parallel. Total resistance?",opts:["1 Ω","2 Ω","4.5 Ω","9 Ω"],ans:1,exp:"(6×3)÷(6+3) = 18÷9 = 2 Ω."},
+{id:39,cat:"Series & Parallel",hint:"KCL = current into a node equals current out.",q:"Kirchhoff's Current Law (KCL) states:",opts:["Voltages in a loop sum to zero","Current into a node equals current out","Power in equals power out","Resistance increases in parallel"],ans:1,exp:"Whatever flows in must flow out — conservation of charge."},
+{id:40,cat:"Series & Parallel",hint:"KVL = sum of voltages around a closed loop = zero.",q:"Kirchhoff's Voltage Law (KVL) states:",opts:["Current at a node is conserved","Sum of voltages around a closed loop = zero","Parallel branches have equal current","Resistance adds in series"],ans:1,exp:"Voltage rises minus voltage drops = 0 in any complete loop."},
+{id:41,cat:"Meters & Instruments",hint:"Voltmeter connects ACROSS (parallel).",q:"A voltmeter must always be connected:",opts:["In series with the load","In parallel with the load","In line with the fuse","Between neutral and ground"],ans:1,exp:"Voltmeter measures voltage difference between two points — connects across (parallel)."},
+{id:42,cat:"Meters & Instruments",hint:"Ammeter goes in series — all current passes through it.",q:"An ammeter must always be connected:",opts:["In parallel with the load","Across the power supply","In series in the circuit","Between ground and neutral"],ans:2,exp:"All current must pass through the ammeter. Goes in series."},
+{id:43,cat:"Meters & Instruments",hint:"Ammeter has near-zero resistance. Parallel across a source = ?",q:"You connect an ammeter in parallel across 120V. What happens?",opts:["Accurate reading","Reads double current","Dead short — meter destroyed","Nothing happens"],ans:2,exp:"Near-zero resistance across a source = short circuit. Meter destroyed."},
+{id:44,cat:"Meters & Instruments",hint:"Applies 500–2,500V to stress-test insulation.",q:"Which instrument tests if cable insulation is damaged?",opts:["Voltmeter","Ohmmeter","Megohmmeter (Megger)","Clamp-on ammeter"],ans:2,exp:"The Megger applies high voltage and reads in megohms."},
+{id:45,cat:"Meters & Instruments",hint:"Senses magnetic field around ONE conductor — no contact needed.",q:"To measure current without breaking the circuit, use a:",opts:["Series ammeter","Voltmeter","Clamp-on ammeter","Megohmmeter"],ans:2,exp:"Clamp-on ammeter — no circuit interruption needed."},
+{id:46,cat:"Meters & Instruments",hint:"OL or infinity = open circuit = no continuity.",q:"Ohmmeter reads OL (infinity) across a fuse. What does this mean?",opts:["Fuse is good","Fuse is blown (open)","Fuse is overloaded","Too many components"],ans:1,exp:"OL = open circuit. Fuse element has burned through."},
+{id:47,cat:"Meters & Instruments",hint:"0Ω = perfect continuity.",q:"Ohmmeter reads 0Ω across a closed switch. What does this mean?",opts:["Switch is broken","Switch is open","Switch is good and closed","Short circuit present"],ans:2,exp:"0Ω = switch contacts are touching. Current can flow freely."},
+{id:48,cat:"Meters & Instruments",hint:"Minimum acceptable insulation: 1 MΩ per kV of operating voltage.",q:"A Megger reads 0.3 MΩ on a cable insulation test. Is this acceptable?",opts:["Yes — any reading above 0","Yes — within tolerance","No — below 1 MΩ means poor insulation","No — only below 0.1 MΩ is a problem"],ans:2,exp:"Below 1 MΩ = failed insulation. Do NOT return to service."},
+{id:49,cat:"Meters & Instruments",hint:"Ohmmeter sends its own voltage — external voltage interferes.",q:"You use an ohmmeter on a live circuit. What happens?",opts:["Accurate reading","False reading — meter may be damaged","Meter compensates automatically","Higher reading"],ans:1,exp:"External voltage interferes AND can damage the meter. Always de-energize first."},
+{id:50,cat:"Meters & Instruments",hint:"Hot and neutral carry current in opposite directions — fields cancel.",q:"You clamp a clamp meter around BOTH wires of a 2-wire circuit. You read:",opts:["Double current","Correct current","Near zero","Half current"],ans:2,exp:"Opposite fields cancel. Always clamp around ONE conductor only."},
+{id:51,cat:"Meters & Instruments",hint:"Blown fuse = open circuit. Where does voltage appear when a circuit is open?",q:"What does a voltmeter read across a blown fuse?",opts:["0V","Half supply voltage","Full supply voltage","Varies"],ans:2,exp:"All source voltage appears across the open break — full supply voltage."},
+{id:52,cat:"Meters & Instruments",hint:"Good fuse is just a wire — no voltage drop across a conductor.",q:"What does a voltmeter read across a good, closed fuse?",opts:["Full supply voltage","0V","Half supply voltage","Varies with current"],ans:1,exp:"0V across a good fuse — essentially 0 resistance."},
+{id:53,cat:"Meters & Instruments",hint:"Only one instrument applies high enough voltage to find subtle insulation breakdown.",q:"You want to test if a motor winding has degraded insulation. Best tool?",opts:["Multimeter on resistance mode","Clamp-on ammeter","Megohmmeter (Megger)","Oscilloscope"],ans:2,exp:"Only the Megger applies enough voltage to reveal subtle insulation breakdown."},
+{id:54,cat:"Meters & Instruments",hint:"Beep = near 0Ω = unbroken path.",q:"A DMM set to continuity mode beeps when you touch the probes to a wire. What does this mean?",opts:["The wire is energized","The wire is broken","The wire has continuity — good connection","The wire has too much resistance"],ans:2,exp:"Beep = solid, unbroken electrical path. De-energize before using continuity mode."},
+{id:55,cat:"Meters & Instruments",hint:"High voltage from the Megger charges the cable — that charge stays after the test.",q:"After a Megger insulation test, before touching the cable you must:",opts:["Wait 30 minutes","Ground the cable to discharge it","Measure with a voltmeter","Record the reading first"],ans:1,exp:"Ground the cable to discharge stored charge before touching."},
+{id:56,cat:"Electrical Safety",hint:"LOTO before any electrical work.",q:"Before working on electrical equipment, what must you do first?",opts:["Wear rubber gloves only","Apply Lockout/Tagout (LOTO)","Reduce the voltage","Notify supervisor only"],ans:1,exp:"LOTO is mandatory. De-energize, lock the disconnect, apply personal tag."},
+{id:57,cat:"Electrical Safety",hint:"Rectifier substations convert AC to DC for the third rail.",q:"The NYC subway third rail voltage is approximately:",opts:["120V AC","480V AC","600–750V DC","13,000V AC"],ans:2,exp:"Third rail is ~600–750V DC — always live and lethal."},
+{id:58,cat:"Electrical Safety",hint:"Grounding = earth connection. Bonding = metal parts to same potential.",q:"What is the difference between grounding and bonding?",opts:["Same thing","Grounding connects to earth; bonding connects metal parts together","Bonding connects to earth; grounding connects metal parts","Grounding is AC only"],ans:1,exp:"Grounding: fault path to earth. Bonding: equalizes metal parts to same potential."},
+{id:59,cat:"Electrical Safety",hint:"A bypassed lockout = life-safety emergency.",q:"You find a coworker has bypassed a lockout device. You should:",opts:["Ignore it — not your job","Tell them verbally it's wrong","Stop work, report to supervisor immediately","Re-apply the lockout yourself"],ans:2,exp:"Stop all work and report to a supervisor immediately. Serious OSHA violation."},
+{id:60,cat:"Electrical Safety",hint:"Green or bare copper = equipment ground.",q:"What color is the equipment grounding conductor (EGC)?",opts:["White","Gray","Red","Green or bare copper"],ans:3,exp:"Green insulation OR bare copper = equipment ground."},
+{id:61,cat:"Electrical Safety",hint:"Explosive energy release — not a spark.",q:"Arc flash is best described as:",opts:["A type of fuse","An explosive energy release from an electrical fault","A wire connection method","Static discharge"],ans:1,exp:"Arc flash = explosive energy release reaching 35,000°F. Requires arc-rated PPE."},
+{id:62,cat:"Electrical Safety",hint:"Multiple items required — no single item is sufficient.",q:"PPE required for electrical work typically includes:",opts:["Hard hat only","Rubber gloves only","Hard hat, safety glasses, rubber gloves, non-conductive footwear","Safety glasses and gloves only"],ans:2,exp:"Full PPE: hard hat, safety glasses, insulated rubber gloves, non-conductive footwear."},
+{id:63,cat:"Electrical Safety",hint:"Megger charges cable insulation with high voltage — that charge stays after the test.",q:"After a Megger test, you must ground the cable before touching it because:",opts:["It's standard procedure","The Megger leaves the cable energized","High voltage charges the insulation — that charge persists","The reading will be inaccurate otherwise"],ans:2,exp:"Stored charge can shock you. Always ground to discharge after Megger testing."},
+{id:64,cat:"Electrical Safety",hint:"Exposed conductors + water = stop immediately.",q:"Which of the following is a valid reason to stop work immediately?",opts:["You're running behind schedule","You discover an unlabeled wire","You find exposed energized conductors near a wet area","The job is more difficult than expected"],ans:2,exp:"Exposed conductors near water = imminent electrocution hazard."},
+{id:65,cat:"Electrical Safety",hint:"Trips at just 5 milliamps.",q:"GFCI outlets protect against:",opts:["Overloads and short circuits","Arc faults in wiring","Ground faults — leakage current through a person","Voltage surges"],ans:2,exp:"GFCI detects 5mA of leakage current and trips in milliseconds."},
+{id:66,cat:"Electrical Safety",hint:"LOTO covers ALL stored energy types.",q:"In a LOTO procedure, stored energy includes:",opts:["Only electrical energy","Only electrical and pneumatic energy","Electrical, pneumatic, hydraulic, mechanical, and thermal energy","None — only electrical equipment needs LOTO"],ans:2,exp:"All stored energy: electrical, pneumatic, hydraulic, mechanical, thermal."},
+{id:67,cat:"Electrical Safety",hint:"Only the worker who applied the lock may remove it.",q:"Who is authorized to remove a lockout lock?",opts:["Any qualified electrician","The supervisor","Only the worker who applied it","The safety officer"],ans:2,exp:"OSHA: only the employee who applied the lock may remove it."},
+{id:68,cat:"Electrical Safety",hint:"Qualified = trained to avoid hazards, not years of experience.",q:"A 'qualified person' in electrical work means someone who:",opts:["Has worked in electricity for 5+ years","Has been trained on hazards and safety procedures","Has a union card","Has passed a written test"],ans:1,exp:"OSHA: qualified = trained to avoid electrical hazards. Training, not time, is the qualifying factor."},
+{id:69,cat:"NEC Code",hint:"Lower AWG = thicker wire = more current. Minimum for 20A?",q:"Minimum wire gauge for a 20A circuit?",opts:["14 AWG","12 AWG","10 AWG","8 AWG"],ans:1,exp:"12 AWG for 20A. 14 AWG is only 15A rated."},
+{id:70,cat:"NEC Code",hint:"Near water = GFCI required.",q:"Where is GFCI protection required?",opts:["All commercial circuits","Bathrooms, kitchens near sinks, garages, outdoors, unfinished basements","Only near pools","Any circuit over 20A"],ans:1,exp:"Anywhere water and electricity might meet."},
+{id:71,cat:"NEC Code",hint:"480V = 151–600V range.",q:"Minimum working clearance in front of a 480V panel?",opts:["2 feet","2.5 feet","3 feet","3.5 feet"],ans:3,exp:"3.5 feet for 151–600V equipment."},
+{id:72,cat:"NEC Code",hint:"The fuse protects the WIRE — never upsize.",q:"A 15A fuse keeps blowing. Worker installs a 30A fuse. This is:",opts:["Acceptable if load demands it","A temporary fix","A NEC violation and fire hazard","Required when equipment overloads"],ans:2,exp:"30A fuse allows current that overheats 14 AWG wire and starts a fire."},
+{id:73,cat:"NEC Code",hint:"Neutral-to-ground bonding ONLY at the main panel.",q:"In a subpanel, neutral and ground:",opts:["Must be bonded together","Must be on separate bars — not bonded","Can share a bar for convenience","Always connect at the first breaker"],ans:1,exp:"Separate isolated bars in subpanels. Bonding creates dangerous parallel neutral paths."},
+{id:74,cat:"NEC Code",hint:"4–6 conductors = 80% derating.",q:"6 current-carrying conductors in one conduit. Derating factor?",opts:["No derating","70%","80%","50%"],ans:2,exp:"4–6 conductors = 80% derating due to heat buildup."},
+{id:75,cat:"NEC Code",hint:"3+ conductors — fill limit between 31% and 53%.",q:"Maximum conduit fill for 3 or more conductors?",opts:["25%","31%","40%","53%"],ans:2,exp:"40% for 3+ conductors."},
+{id:76,cat:"NEC Code",hint:"Splices must be in an accessible box.",q:"All wire splices must be made:",opts:["In the wall where hidden","Inside an accessible junction box","At the panel only","Anywhere if properly insulated"],ans:1,exp:"NEC requires all splices in accessible boxes."},
+{id:77,cat:"NEC Code",hint:"AFCI detects dangerous arcing in damaged wiring.",q:"AFCI protection guards against:",opts:["Ground faults near water","Arc faults that cause fires","Voltage spikes","Overloads in motors"],ans:1,exp:"AFCI trips before arcing in damaged wiring starts a fire."},
+{id:78,cat:"NEC Code",hint:"3% max on branch circuits.",q:"NEC recommended maximum voltage drop on a branch circuit:",opts:["1%","3%","5%","10%"],ans:1,exp:"3% max on branch circuit, 5% total from service entrance."},
+{id:79,cat:"NEC Code",hint:"Lower AWG number = thicker wire.",q:"Which wire is THICKER?",opts:["14 AWG","12 AWG","10 AWG","8 AWG"],ans:3,exp:"8 AWG is thickest. 14 AWG is thinnest."},
+{id:80,cat:"NEC Code",hint:"120V is in the 0–150V range.",q:"Minimum working clearance in front of a standard 120V household panel?",opts:["2 feet","3 feet","3.5 feet","4 feet"],ans:1,exp:"0–150V = 3 feet minimum."},
+{id:81,cat:"NEC Code",hint:"10–20 conductors = extreme derating.",q:"10–20 current-carrying conductors in one conduit. Derating factor?",opts:["80%","70%","60%","50%"],ans:3,exp:"10–20 conductors = 50% derating."},
+{id:82,cat:"NEC Code",hint:"Must be re-identified with black tape at each end.",q:"A white wire can be used as a hot conductor when:",opts:["Never under any circumstances","In switch loops, re-identified with black tape","Only in 240V circuits","When no black wire is available"],ans:1,exp:"Switch loops allow white-as-hot when re-identified with black tape at each end."},
+{id:83,cat:"NEC Code",hint:"Minimum headroom = more than 6 feet.",q:"What is the minimum headroom required in an electrical equipment room?",opts:["5 feet","6 feet","6.5 feet","7 feet"],ans:2,exp:"NEC requires 6.5 feet minimum headroom."},
+{id:84,cat:"NEC Code",hint:"No pipes, ducts, or foreign systems above panels.",q:"The 'dedicated space' above an electrical panel means:",opts:["The panel must face north","The space above the panel to the ceiling must be free of piping, ducts, and foreign systems","Only licensed electricians can enter","The panel requires a dedicated circuit"],ans:1,exp:"Pipes, HVAC ducts prohibited in dedicated space above panels."},
+{id:85,cat:"NEC Code",hint:"GFCI trips at 5 milliamps.",q:"GFCI trips at what leakage current threshold?",opts:["1 milliamp","5 milliamps","10 milliamps","15 milliamps"],ans:1,exp:"5mA — fast enough to prevent lethal electrocution."},
+{id:86,cat:"MTA & Theory",hint:"Rectifiers convert AC to DC.",q:"What type of current powers the NYC subway third rail?",opts:["60 Hz AC","120V AC","600–750V DC","480V 3-phase AC"],ans:2,exp:"Third rail is DC — ~600–750 volts."},
+{id:87,cat:"MTA & Theory",hint:"Transformers need a CHANGING magnetic field.",q:"Can a transformer operate on DC voltage?",opts:["Yes, at reduced efficiency","Yes if properly sized","No — transformers only work on AC","Only step-down transformers work on DC"],ans:2,exp:"DC is constant — no changing field, no induction. Transformers require AC."},
+{id:88,cat:"MTA & Theory",hint:"V2 = V1 × (N2/N1).",q:"Transformer: 500 primary turns, 100 secondary turns, 480V input. Output?",opts:["24 V","96 V","480 V","2,400 V"],ans:1,exp:"V2 = 480 × (100/500) = 96V. 5:1 step-down."},
+{id:89,cat:"MTA & Theory",hint:"US power grid standard frequency.",q:"US standard AC frequency is:",opts:["50 Hz","60 Hz","120 Hz","400 Hz"],ans:1,exp:"60 Hz — 60 cycles per second."},
+{id:90,cat:"MTA & Theory",hint:"Vp = Vrms × 1.414.",q:"A 120V outlet has what approximate peak voltage?",opts:["120 V","141 V","170 V","240 V"],ans:2,exp:"Vp = 120 × 1.414 ≈ 170V."},
+{id:91,cat:"MTA & Theory",hint:"Capacitor blocks DC once charged; passes AC.",q:"Which component blocks DC but passes AC?",opts:["Inductor","Resistor","Capacitor","Diode"],ans:2,exp:"Capacitor blocks steady DC once charged. AC constantly reverses so it passes."},
+{id:92,cat:"MTA & Theory",hint:"Inductor opposes changes in current (Lenz's Law).",q:"Which component passes DC but opposes AC?",opts:["Capacitor","Diode","Resistor","Inductor (coil)"],ans:3,exp:"Inductor opposes changes in current. DC is steady — no opposition."},
+{id:93,cat:"MTA & Theory",hint:"AC → DC = rectifier.",q:"What converts AC to DC for the subway third rail?",opts:["Transformer","Inverter","Rectifier","Capacitor bank"],ans:2,exp:"Rectifiers in MTA substations convert AC to DC using diodes."},
+{id:94,cat:"MTA & Theory",hint:"FLA = Full Load Amps. Motor is 50% over FLA.",q:"A motor draws 15A but FLA nameplate says 10A. What does this mean?",opts:["Normal — motors vary","Motor is running efficiently","Motor is overloaded","Clamp meter needs calibration"],ans:2,exp:"15A vs 10A FLA = seriously overloaded. Causes overheating."},
+{id:95,cat:"MTA & Theory",hint:"Low-voltage control switches a high-voltage circuit.",q:"A relay's purpose in an electrical system is to:",opts:["Store charge","Measure current","Use low-voltage control to switch a high-voltage circuit","Convert AC to DC"],ans:2,exp:"Relay coil energized → magnetic field closes high-voltage contacts."},
+{id:96,cat:"MTA & Theory",hint:"RMS = effective value, like DC in work done.",q:"RMS voltage represents:",opts:["Maximum instantaneous voltage","Average of peaks","DC equivalent — what actually does the work","Root Maximum Squared"],ans:2,exp:"RMS = effective value producing same heating effect as equivalent DC."},
+{id:97,cat:"MTA & Theory",hint:"V2 = V1 × (N2/N1). 800/200 turns ratio.",q:"A transformer has 200 primary turns and 800 secondary turns with 120V input. Output?",opts:["30 V","120 V","480 V","960 V"],ans:2,exp:"V2 = 120 × (800/200) = 480V. 1:4 step-up."},
+{id:98,cat:"MTA & Theory",hint:"Track circuits should read small voltage when clear.",q:"A track circuit reads zero volts when no train is present. This likely indicates:",opts:["Normal operation","Correct function","Possible broken rail, bad connection, or failed equipment","Train approaching slowly"],ans:2,exp:"Zero volts when clear = problem — broken rail, corroded connection, or failed equipment."},
+{id:99,cat:"MTA & Theory",hint:"Bonding = equalizing potential between metal parts.",q:"What is the purpose of bonding in an electrical system?",opts:["Connect equipment to earth","Connect all metal parts to the same potential to prevent voltage differences","Increase system voltage","Reduce resistance in conductors"],ans:1,exp:"Bonding eliminates voltage differences between metal parts — prevents shock."},
+{id:100,cat:"MTA & Theory",hint:"XL = 2πfL. Higher f = higher XL.",q:"Inductive reactance (XL) increases when:",opts:["Frequency decreases","Frequency increases","Resistance increases","Voltage decreases"],ans:1,exp:"XL = 2πfL. Frequency directly proportional to inductive reactance."},
+{id:101,cat:"Mechanical Aptitude",hint:"Force × Distance = Force × Distance.",q:"A 10-lb weight is 4 feet from a fulcrum. To balance it, how much force is needed 2 feet on the other side?",opts:["5 lb","10 lb","20 lb","40 lb"],ans:2,exp:"10 × 4 = F × 2. F = 20 lb."},
+{id:102,cat:"Mechanical Aptitude",hint:"2 rope sections share the load equally.",q:"A pulley system has 2 supporting rope sections. To lift a 100 lb load, you pull with approximately:",opts:["25 lb","50 lb","100 lb","200 lb"],ans:1,exp:"100÷2 = 50 lb."},
+{id:103,cat:"Mechanical Aptitude",hint:"More teeth = slower speed.",q:"Gear A has 20 teeth and meshes with Gear B which has 40 teeth. If A turns at 100 RPM, B turns at:",opts:["25 RPM","50 RPM","100 RPM","200 RPM"],ans:1,exp:"100 × (20/40) = 50 RPM."},
+{id:104,cat:"Mechanical Aptitude",hint:"Torque = Force × Distance. Longer wrench = more torque.",q:"Which wrench provides the most torque for the same applied force?",opts:["6-inch wrench","8-inch wrench","12-inch wrench","4-inch wrench"],ans:2,exp:"12-inch wrench = longest lever arm = most torque."},
+{id:105,cat:"Mechanical Aptitude",hint:"Torque = Force × Radius.",q:"A screwdriver with a larger handle diameter provides:",opts:["Less torque","More torque","Same torque","More speed"],ans:1,exp:"Larger handle = larger radius = more torque for same hand force."},
+{id:106,cat:"Mechanical Aptitude",hint:"Rolling friction < sliding friction.",q:"If you need to move a heavy object across a floor, which reduces friction most?",opts:["Pushing from behind","Using rollers or wheels","Increasing the surface area of contact","Wetting the surface with water"],ans:1,exp:"Rolling friction is far less than sliding friction."},
+{id:107,cat:"Mechanical Aptitude",hint:"Clockwise tightens on one end, loosens on the other.",q:"A pipe has threads on both ends. When you turn it clockwise (from the end), it:",opts:["Unscrews from both sides","Screws in on one end, unscrews on the other","Both ends behave the same","It depends on the pipe material"],ans:1,exp:"Right-hand threads: one end tightens, other loosens — mirror images."},
+{id:108,cat:"Mechanical Aptitude",hint:"Shallower angle = less force, more distance.",q:"Which inclined plane (ramp) requires the LEAST force to push a load to the top?",opts:["45-degree angle","30-degree angle","60-degree angle","75-degree angle"],ans:1,exp:"30 degrees = shallowest = least push force."},
+{id:109,cat:"Mechanical Aptitude",hint:"Smaller pulley = faster rotation.",q:"A belt drives two pulleys. Large pulley: 12-inch diameter. Small pulley: 4-inch diameter. If the large pulley turns at 100 RPM, the small one turns at:",opts:["33 RPM","100 RPM","300 RPM","400 RPM"],ans:2,exp:"100 × (12/4) = 300 RPM."},
+{id:110,cat:"Mechanical Aptitude",hint:"Heavier object wins.",q:"Two blocks connected by rope over a pulley: A weighs 15 lb, B weighs 10 lb. What happens?",opts:["Nothing — they balance","Block A goes down, Block B goes up","Block B goes down, Block A goes up","They oscillate"],ans:1,exp:"15 lb > 10 lb, so A goes down."},
+{id:111,cat:"Mechanical Aptitude",hint:"Torque = Force × Length. Double length = double torque.",q:"When tightening a bolt, if you double the length of the wrench, the torque:",opts:["Stays the same","Doubles","Quadruples","Halves"],ans:1,exp:"Torque doubles when length doubles with same force."},
+{id:112,cat:"Mechanical Aptitude",hint:"Pascal's Law: pressure = Force ÷ Area.",q:"Hydraulic jack: small piston 1 sq in, large piston 10 sq in, 50 lb input. Output force?",opts:["5 lb","50 lb","500 lb","5,000 lb"],ans:2,exp:"Pressure = 50÷1 = 50 psi. Force = 50 × 10 = 500 lb."},
+{id:113,cat:"Tools & Field",hint:"Threads through conduit to pull wire.",q:"To pull wire through 100 feet of conduit, the best tool is:",opts:["A hammer","A fish tape or wire puller","A conduit bender","A knockout punch"],ans:1,exp:"Fish tape threads through conduit and attaches to wire for pulling."},
+{id:114,cat:"Tools & Field",hint:"Named after what it does to conduit.",q:"To bend ¾-inch EMT conduit, you use a:",opts:["Pipe wrench","Conduit bender (EMT type)","Channel-lock pliers","Hydraulic press"],ans:1,exp:"Conduit bender — match shoe size to conduit size."},
+{id:115,cat:"Tools & Field",hint:"Punches clean holes in metal panels.",q:"To create a clean hole in an electrical panel for conduit, you use a:",opts:["Drill bit","Hole saw","Knockout punch set","Conduit bender"],ans:2,exp:"Knockout punch creates accurate holes without distorting metal."},
+{id:116,cat:"Tools & Field",hint:"High-force mechanical connection for large cable lugs.",q:"To connect a large cable lug to a cable end permanently, you use a:",opts:["Wire nut","Soldering iron","Hydraulic crimper","Compression fitting"],ans:2,exp:"Hydraulic crimper creates reliable, permanent high-current connections."},
+{id:117,cat:"Tools & Field",hint:"Cuts, twists, and grips — the all-purpose electrical hand tool.",q:"Lineman's pliers are primarily used for:",opts:["Measuring voltage","Bending conduit","Cutting, twisting, and gripping wires","Testing insulation"],ans:2,exp:"Lineman's pliers: cut wire, twist connections, grip conductors."},
+{id:118,cat:"Tools & Field",hint:"Gauge-matched notches cut only insulation.",q:"To strip wire insulation without nicking the conductor, you use a:",opts:["Utility knife","Wire stripper sized to the gauge","Lineman's pliers","Diagonal cutters"],ans:1,exp:"Wire strippers cut insulation at exactly the right depth."},
+{id:119,cat:"Tools & Field",hint:"Ensures terminal connections meet a specific tightness specification.",q:"A torque screwdriver is used to:",opts:["Identify wire colors","Tighten terminals to a specified torque value","Strip wire insulation","Test voltage"],ans:1,exp:"Torque screwdriver prevents loose connections (fire hazard) and over-tightening."},
+{id:120,cat:"Tools & Field",hint:"Acid flux corrodes copper connections over time.",q:"Rosin-core solder is used for electrical work instead of acid-core because:",opts:["It's cheaper","Acid flux corrodes electrical connections over time","It melts at a lower temperature","It's stronger"],ans:1,exp:"Rosin-core solder uses non-corrosive flux safe for electrical work."},
+{id:121,cat:"Tools & Field",hint:"Detects AC voltage without physical contact.",q:"A voltage tester (non-contact/tick tracer) is used to:",opts:["Measure exact voltage","Detect presence of AC voltage without contact","Test insulation resistance","Measure current"],ans:1,exp:"Non-contact tester detects electromagnetic field of energized AC conductors."},
+{id:122,cat:"Tools & Field",hint:"Non-conductive — safe if it contacts live wires inside conduit.",q:"A fish tape made of fiberglass (vs steel) is preferred when:",opts:["Pulling heavy cable","Working in energized conduit where the tape might contact live wires","Pulling through long straight runs","Working outdoors"],ans:1,exp:"Fiberglass is non-conductive. Steel tape conducts electricity — dangerous in energized conduit."},
+{id:123,cat:"Motors & Controls",hint:"FLA = current at rated load.",q:"FLA on a motor nameplate means:",opts:["Final Load Amperage","Full Load Amps — current at rated load","Frequency Load Average","Fault Line Amperage"],ans:1,exp:"FLA = Full Load Amps. Used to size conductors, overload protection, and breakers."},
+{id:124,cat:"Motors & Controls",hint:"Starting inrush is much higher than running current.",q:"A motor's starting current compared to its running current is typically:",opts:["Equal","Lower","6–8 times higher","Twice as high"],ans:2,exp:"Motor inrush = 6–8× FLA. Time-delay fuses handle the startup surge."},
+{id:125,cat:"Motors & Controls",hint:"Overload relays protect motor windings, not the wiring.",q:"Overload protection on a motor is sized to protect:",opts:["The breaker panel","The motor windings from overheating","The building wiring","The power supply"],ans:1,exp:"Overload relays protect motor windings from thermal damage."},
+{id:126,cat:"Motors & Controls",hint:"Three-phase is more efficient and smoother.",q:"A single-phase motor compared to a three-phase motor of the same horsepower:",opts:["Draws less current","Is more efficient","Draws more current and is less efficient","Has longer life"],ans:2,exp:"Three-phase motors are more efficient, smoother, draw less current."},
+{id:127,cat:"Motors & Controls",hint:"Swapping two leads reverses phase sequence = reverses rotation.",q:"If a three-phase motor runs backwards, you fix it by:",opts:["Reversing the motor physically","Swapping any two of the three power leads","Rewiring the entire motor","Changing the frequency"],ans:1,exp:"Swap ANY two of three phase conductors to reverse rotation."},
+{id:128,cat:"Motors & Controls",hint:"SF 1.15 = 115% of rated HP continuously.",q:"A motor nameplate shows Service Factor (SF) of 1.15. This means:",opts:["The motor can run at 115% of rated HP continuously","The motor runs at 85% efficiency","The motor requires 15% more voltage","Safety factor of 1.15:1"],ans:0,exp:"SF 1.15 = motor can sustain 115% of rated HP load continuously."},
+{id:129,cat:"Motors & Controls",hint:"Class F = 155°C max winding temperature.",q:"What does insulation class F on a motor nameplate indicate?",opts:["The motor failed inspection","Maximum winding temperature of 155°C","The motor uses fiberglass windings","Frequency rating"],ans:1,exp:"Class A=105°C, B=130°C, F=155°C, H=180°C."},
+{id:130,cat:"Motors & Controls",hint:"Hot motor + tripped overload = drawing too much current.",q:"A motor is hot to the touch and tripping its overload. Most likely cause?",opts:["Normal operation","Overvoltage","Overloaded — drawing too much current","Wrong direction rotation"],ans:2,exp:"A motor that is both hot AND tripping its overload relay is drawing more current than its FLA rating. Heat is the symptom — overcurrent is the cause. The overload relay is doing its job: protecting the motor windings from burning out before damage occurs. Common causes: 1) Mechanical overload — the driven load is too heavy or has jammed. 2) Seized or dry bearings increasing friction on the shaft. 3) Low supply voltage — a motor draws more current to maintain torque when voltage drops. 4) Undersized motor for the application. Never just reset the overload and walk away — always find and fix the root cause first, or the motor will fail."},
+{id:131,cat:"Motors & Controls",hint:"NEC requires 125% of FLA for motor conductors.",q:"Conductors supplying a motor are typically sized at what percentage of FLA?",opts:["100% of FLA","115% of FLA","125% of FLA","150% of FLA"],ans:2,exp:"NEC: motor branch circuit conductors sized at 125% of FLA minimum."},
+{id:132,cat:"Motors & Controls",hint:"Find and fix the cause before resetting.",q:"A NEMA starter with overload relays is tripping repeatedly. After resetting, you should:",opts:["Replace the fuses with a higher rating","Find and fix the cause of overloading before resetting again","Keep resetting until it stops tripping","Bypass the overload relay"],ans:1,exp:"Repeated resets overheat the motor. Find and fix the root cause first."},
+{id:133,cat:"Workplace Math",hint:"Kilo = 1,000. Divide by 1,000.",q:"Convert 3,500 watts to kilowatts.",opts:["0.35 kW","3.5 kW","35 kW","350 kW"],ans:1,exp:"3,500 ÷ 1,000 = 3.5 kW."},
+{id:134,cat:"Workplace Math",hint:"Milli = 1/1,000. Divide by 1,000.",q:"Convert 750 milliamps to amps.",opts:["0.075 A","0.75 A","7.5 A","75 A"],ans:1,exp:"750 ÷ 1,000 = 0.75 A."},
+{id:135,cat:"Workplace Math",hint:"Derate: 20A × 0.80.",q:"A wire rated 20A must be derated to 80%. New maximum?",opts:["12 A","14 A","16 A","18 A"],ans:2,exp:"20 × 0.80 = 16 A."},
+{id:136,cat:"Workplace Math",hint:"V2 = V1 × (N2/N1). Fewer secondary turns.",q:"Transformer: 200 primary turns, 50 secondary, 240V input. Output?",opts:["30 V","60 V","120 V","960 V"],ans:1,exp:"240 × (50/200) = 60V. 4:1 step-down."},
+{id:137,cat:"Workplace Math",hint:"NEC 80% rule: 15 × 0.80 = 12A.",q:"A 15A circuit at 120V. Maximum continuous load allowed (NEC 80% rule)?",opts:["10 A / 1,200 W","12 A / 1,440 W","14 A / 1,680 W","15 A / 1,800 W"],ans:1,exp:"15 × 0.80 = 12A. 12 × 120 = 1,440W max."},
+{id:138,cat:"Workplace Math",hint:"Total circuit length = 200 ft (there and back).",q:"12 AWG copper is 1.98Ω per 1,000 ft. A 100-ft run (200 ft total) carries 15A. Voltage drop?",opts:["2.97 V","4.46 V","5.94 V","8.91 V"],ans:2,exp:"R = 0.396Ω. V_drop = 15 × 0.396 = 5.94V."},
+{id:139,cat:"Workplace Math",hint:"70% of 30 = 30 × 0.70.",q:"What is 70% of 30 amps?",opts:["15 A","18 A","21 A","24 A"],ans:2,exp:"30 × 0.70 = 21 A. Derating for 7–9 conductors."},
+{id:140,cat:"Workplace Math",hint:"P = V × I, then HP = Watts ÷ 746.",q:"A motor draws 8.5A on a 120V circuit. Approximate horsepower? (1 HP ≈ 746W)",opts:["0.75 HP","1.0 HP","1.37 HP","2.0 HP"],ans:2,exp:"P = 120 × 8.5 = 1,020W. HP = 1,020 ÷ 746 = 1.37 HP."},
+{id:141,cat:"Reading Comprehension",passageId:"p1",groupLabel:"Passage 1 · Q 1 of 4",hint:"Find the word 'First' in the passage.",q:"According to the LOTO procedure, what is the FIRST step?",opts:["Apply your personal lock","Notify all affected employees","Shut down the equipment","Release stored energy"],ans:1,exp:"First: notify all affected employees. Notification before any physical action."},
+{id:142,cat:"Reading Comprehension",passageId:"p1",groupLabel:"Passage 1 · Q 2 of 4",hint:"Find 'isolate' — what comes right after it?",q:"After isolating the equipment, what is the next step in the LOTO procedure?",opts:["Verify de-energization","Apply your personal lock and tag","Release stored energy","Notify employees"],ans:1,exp:"Sequence: shut down → isolate → apply lock and tag → release stored energy → verify."},
+{id:143,cat:"Reading Comprehension",passageId:"p1",groupLabel:"Passage 1 · Q 3 of 4",hint:"Find the last sentence of the passage.",q:"According to the passage, who may remove a lockout lock?",opts:["Any qualified electrician","The supervisor","Only the worker who applied it","The safety officer"],ans:2,exp:"Only the worker who applied the lock may remove it."},
+{id:144,cat:"Reading Comprehension",passageId:"p1",groupLabel:"Passage 1 · Q 4 of 4",hint:"The passage mentions 'discharge capacitors' as an example.",q:"The passage mentions releasing 'stored energy.' Which of the following is an example?",opts:["Running current in a wire","A charged capacitor","Voltage at the service entrance","Current in a motor at full speed"],ans:1,exp:"A charged capacitor holds electrical energy even after power is disconnected."},
+{id:145,cat:"Reading Comprehension",passageId:"p2",groupLabel:"Passage 2 · Q 1 of 3",hint:"277V falls in the 151–600V range.",q:"According to the NEC passage, what is the minimum working clearance for a 277V panel?",opts:["3 feet","3.5 feet","4 feet","2.5 feet"],ans:1,exp:"277V = 151–600V range = 3.5 feet minimum."},
+{id:146,cat:"Reading Comprehension",passageId:"p2",groupLabel:"Passage 2 · Q 2 of 3",hint:"Find 'wide' or 'width' in the passage.",q:"According to the passage, what is the minimum WIDTH of the working space?",opts:["24 inches","30 inches","36 inches","48 inches"],ans:1,exp:"At least 30 inches wide, or the width of the equipment — whichever is greater."},
+{id:147,cat:"Reading Comprehension",passageId:"p2",groupLabel:"Passage 2 · Q 3 of 3",hint:"Find 'dedicated space' in the passage.",q:"What does 'dedicated space' mean according to the NEC passage?",opts:["A room only electricians can enter","The space above the panel to ceiling must be free of pipes and ducts","The panel must have a dedicated circuit","Only licensed workers may work there"],ans:1,exp:"Dedicated space above panel: free of all foreign systems including pipes and ductwork."},
+{id:148,cat:"Reading Comprehension",passageId:"p3",groupLabel:"Passage 3 · Q 1 of 3",hint:"Find 'FLA' in the passage — what is it used for?",q:"According to the motor nameplate passage, FLA is used to size:",opts:["The motor's RPM","Overload protection and conductors","The horsepower output","The insulation class"],ans:1,exp:"FLA is used to size overload protection and conductors."},
+{id:149,cat:"Reading Comprehension",passageId:"p3",groupLabel:"Passage 3 · Q 2 of 3",hint:"SF 1.15 = the motor can handle 1.15× rated load.",q:"A motor with a Service Factor of 1.15 can handle how much overload continuously?",opts:["15% more than rated","85% of rated load","115% more than rated","15% less than rated"],ans:0,exp:"SF 1.15 means 115% of rated HP — 15% more than rated."},
+{id:150,cat:"Reading Comprehension",passageId:"p3",groupLabel:"Passage 3 · Q 3 of 3",hint:"Find insulation class H in the passage.",q:"According to the passage, insulation class H has a maximum temperature rating of:",opts:["105°C","130°C","155°C","180°C"],ans:3,exp:"Class H = 180°C. A=105, B=130, F=155, H=180."},
+{id:151,cat:"Reading Comprehension",passageId:"p4",groupLabel:"Subway Power · Q 1 of 5",hint:"Find the voltage between each phase wire and the grounded neutral.",q:"The voltage on the signal main is most nearly:",opts:["600V DC","208V AC","120V AC","120V DC"],ans:2,exp:"Signal power = 120V AC (one phase wire to neutral), through 1:1 transformer to signal main."},
+{id:152,cat:"Reading Comprehension",passageId:"p4",groupLabel:"Subway Power · Q 2 of 5",hint:"Find what voltage the rectifiers supply to the 3rd rail.",q:"The voltage on the contact shoes of the car is:",opts:["120V AC","208V AC","600V DC","600V AC"],ans:2,exp:"600V DC from mercury arc rectifiers, fed to 3rd rail, picked up by contact shoes."},
+{id:153,cat:"Reading Comprehension",passageId:"p4",groupLabel:"Subway Power · Q 3 of 5",hint:"1:1 transformer = same voltage in/out. What's the purpose then?",q:"Since the 1:1 transformer does not change the voltage, its purpose is to insulate:",opts:["The 3rd rail from the running rail","The signal main from the 208V supply","Adjacent track circuits","The car motors from the contact shoes"],ans:1,exp:"1:1 transformer provides electrical isolation — insulates signal main from 3-phase 208V supply."},
+{id:154,cat:"Reading Comprehension",passageId:"p4",groupLabel:"Subway Power · Q 4 of 5",hint:"Find which rail has 'heavy bonds' vs 'light bonds'.",q:"Light bonds are provided on the rail joints of:",opts:["The 3rd rail","Both running rails","The signal rail only","The negative propulsion current rail"],ans:2,exp:"Signal rail has 'relatively light bonds' between insulated joints."},
+{id:155,cat:"Reading Comprehension",passageId:"p4",groupLabel:"Subway Power · Q 5 of 5",hint:"Find how track signal circuits are separated from each other.",q:"Track signal circuits are separated from each other by:",opts:["Rail bonds","Ordinary rail joints","A grounded neutral","Insulated rail joints"],ans:3,exp:"Insulated rail joints divide the signal rail into separate track circuit sections."},
+{id:156,cat:"Circuit Diagrams",diagramId:"d1",groupLabel:"Series Circuit · Q 1 of 5",hint:"Trace the top rail path to the lamp — which switches are in that path?",q:"Refer to the diagram. To light the 300-watt lamp, which switches MUST be closed?",opts:["X and Y only","Y and W only","X and W only","X, Y and W"],ans:1,exp:"SW-W is on the top rail path to the lamp. SW-X is on the bottom return rail. Both must close to complete the circuit through the lamp."},
+{id:157,cat:"Circuit Diagrams",diagramId:"d1",groupLabel:"Series Circuit · Q 2 of 5",hint:"I = V ÷ R.",q:"With 120V applied across the 10-ohm resistor R1, the current drawn is:",opts:["1/12 ampere","1.2 amperes","12 amperes","1200 amperes"],ans:2,exp:"I = 120 ÷ 10 = 12 amperes."},
+{id:158,cat:"Circuit Diagrams",diagramId:"d1",groupLabel:"Series Circuit · Q 3 of 5",hint:"P = V²÷R.",q:"With 120V applied to the 10-ohm resistor R1, the power used is:",opts:["1.44 kW","1.2 kW","0.144 kW","0.12 kW"],ans:0,exp:"P = 14,400 ÷ 10 = 1,440W = 1.44 kW."},
+{id:159,cat:"Circuit Diagrams",diagramId:"d1",groupLabel:"Series Circuit · Q 4 of 5",hint:"I = P ÷ V.",q:"The current drawn by the 300-watt lamp when lighted is approximately:",opts:["0.25 amperes","2.5 amperes","25 amperes","3.6 amperes"],ans:1,exp:"I = 300 ÷ 120 = 2.5 amperes."},
+{id:160,cat:"Circuit Diagrams",diagramId:"d1",groupLabel:"Series Circuit · Q 5 of 5",hint:"A in a circle = ammeter symbol.",q:"In the circuit shown, the symbol A in a circle indicates a(n):",opts:["Ammeter","AND circuit","Voltmeter","Wattmeter"],ans:0,exp:"Circle with A = ammeter. Always connected in series."},
+{id:161,cat:"Circuit Diagrams",diagramId:"d2",groupLabel:"Parallel Circuit · Q 1 of 4",hint:"1/R_T = 1/10 + 1/20 + 1/30.",q:"What is the equivalent (total) resistance of the three parallel branches?",opts:["About 4.9Ω","20Ω","10Ω","60Ω"],ans:0,exp:"1/R_T = 6/60+3/60+2/60 = 11/60. R_T ≈ 5.45Ω. Or: IT=22A, R=120/22≈5.45Ω."},
+{id:162,cat:"Circuit Diagrams",diagramId:"d2",groupLabel:"Parallel Circuit · Q 2 of 4",hint:"In parallel, voltage is the same across all branches.",q:"In this parallel circuit, the voltage across R2 (20Ω branch) is:",opts:["60V","40V","120V","24V"],ans:2,exp:"All parallel branches see the full source voltage — 120V."},
+{id:163,cat:"Circuit Diagrams",diagramId:"d2",groupLabel:"Parallel Circuit · Q 3 of 4",hint:"I_T = I₁ + I₂ + I₃.",q:"What is the total current supplied by the source?",opts:["4A","12A","22A","6A"],ans:2,exp:"12 + 6 + 4 = 22A. KCL: branch currents add."},
+{id:164,cat:"Circuit Diagrams",diagramId:"d2",groupLabel:"Parallel Circuit · Q 4 of 4",hint:"When R1 opens, R2 still connects to the same 120V rails.",q:"If the R1 (10Ω) branch opens, what happens to the voltage across R2?",opts:["It drops to zero","It increases to 240V","It stays at 120V","It drops to 60V"],ans:2,exp:"Parallel branches are independent. R2 still sees 120V from the supply rails."},
+{id:165,cat:"Circuit Diagrams",diagramId:"d3",groupLabel:"Switch Logic · Q 1 of 5",hint:"Trace the top rail path to the lamp.",q:"To light the 300-watt lamp, which switches MUST be closed?",opts:["X and Y","Y and W","Z only","X and Z"],ans:1,exp:"Y and W are in the top rail path to the lamp."},
+{id:166,cat:"Circuit Diagrams",diagramId:"d3",groupLabel:"Switch Logic · Q 2 of 5",hint:"Trace a complete path through the motor.",q:"To run the motor (without lighting the lamp), which switches must be closed?",opts:["Y and W","X and Z","W and Z","Y and Z"],ans:2,exp:"W routes current to the motor; Z connects back to the bottom rail. W and Z complete the motor circuit."},
+{id:167,cat:"Circuit Diagrams",diagramId:"d3",groupLabel:"Switch Logic · Q 3 of 5",hint:"Z closed creates a direct path that shorts the motor.",q:"If all switches W, X, Y, and Z are closed, the following will happen:",opts:["Lamp lights and motor runs normally","Lamp lights but motor won't run","A short circuit — main fuse blows","Only the motor runs"],ans:2,exp:"Z with all switches closed shorts the motor — massive current blows the main fuse."},
+{id:168,cat:"Circuit Diagrams",diagramId:"d3",groupLabel:"Switch Logic · Q 4 of 5",hint:"Ammeter is in series on the bottom return rail.",q:"For the ammeter to show a reading, which condition is required?",opts:["Switch Y must be closed","Switch X must be closed","Switch Z must be open","Switch W must be open"],ans:1,exp:"X must be closed — it's in the bottom rail return path where the ammeter sits."},
+{id:169,cat:"Circuit Diagrams",diagramId:"d3",groupLabel:"Switch Logic · Q 5 of 5",hint:"Motor is rated 4A.",q:"With switches set to run ONLY the motor, the current through the main fuse will be approximately:",opts:["0 amperes","4 amperes","12 amperes","2.5 amperes"],ans:1,exp:"Motor rated at 4A. Only the motor running = 4A through the fuse."},
+{id:170,cat:"Circuit Diagrams",diagramId:"d4",groupLabel:"Relay Circuit · Q 1 of 4",hint:"Closing control switch energizes the coil — what does an energized coil do to K1?",q:"When the control switch is closed, what happens to the lamp?",opts:["Lamp goes off","Lamp lights up","Lamp flickers","Nothing changes"],ans:1,exp:"Coil energized → K1 contacts close → current flows through lamp → lamp lights."},
+{id:171,cat:"Circuit Diagrams",diagramId:"d4",groupLabel:"Relay Circuit · Q 2 of 4",hint:"K1 is Normally Open (NO).",q:"With the control switch OPEN (coil de-energized), the relay contacts K1 are:",opts:["Closed — lamp is on","Open — lamp is off","Closed — lamp is off","Open — lamp is on"],ans:1,exp:"NO contacts: coil off → contacts open → lamp off."},
+{id:172,cat:"Circuit Diagrams",diagramId:"d4",groupLabel:"Relay Circuit · Q 3 of 4",hint:"I = V ÷ R. Coil is 30Ω on 6V.",q:"The current flowing through the relay coil when energized is:",opts:["5 amperes","0.5 amperes","0.2 amperes","2 amperes"],ans:2,exp:"I = 6 ÷ 30 = 0.2 amperes. Small control current switches large power circuit."},
+{id:173,cat:"Circuit Diagrams",diagramId:"d4",groupLabel:"Relay Circuit · Q 4 of 4",hint:"Small signal controls large load.",q:"The main advantage of using a relay in this circuit is that it:",opts:["Increases the voltage to the lamp","Allows a low-voltage control circuit to switch a high-voltage power circuit","Reduces the current to the lamp","Acts as a voltage regulator"],ans:1,exp:"6V/0.2A control switches a 120V lamp — electrical isolation and power amplification."},
+{id:174,cat:"Circuit Diagrams",diagramId:"d5",groupLabel:"Transformer · Q 1 of 4",hint:"V2 = V1 × (N2/N1). Plug in: 480 × (100/500).",q:"With 480V input and a 500:100 turns ratio, the output voltage is:",opts:["2,400V","96V","480V","24V"],ans:1,exp:"V2 = 480 × (100/500) = 96V. 5:1 step-down."},
+{id:175,cat:"Circuit Diagrams",diagramId:"d5",groupLabel:"Transformer · Q 2 of 4",hint:"V1×I1 = V2×I2. Load draws 2A at 96V.",q:"If the secondary load draws 2 amperes, the primary current is approximately:",opts:["10 amperes","2 amperes","0.4 amperes","0.04 amperes"],ans:2,exp:"480×I1 = 96×2. I1 = 192/480 = 0.4A."},
+{id:176,cat:"Circuit Diagrams",diagramId:"d5",groupLabel:"Transformer · Q 3 of 4",hint:"N2 < N1 = V2 < V1.",q:"This transformer is best described as a:",opts:["Step-up transformer","Step-down transformer","Isolation transformer","Auto-transformer"],ans:1,exp:"Fewer secondary turns = lower output voltage = step-DOWN."},
+{id:177,cat:"Circuit Diagrams",diagramId:"d5",groupLabel:"Transformer · Q 4 of 4",hint:"DC through low-resistance primary coil = massive current.",q:"If this transformer were connected to 480V DC instead of AC, the result would be:",opts:["Normal operation at lower efficiency","Output voltage would be 96V DC","Primary current would be excessive and damage the transformer","Output voltage would double"],ans:2,exp:"DC has no reactance — primary acts as low-resistance coil, drawing massive DC current and destroying the transformer."},
+{id:178,cat:"Circuit Diagrams",diagramId:"d6",groupLabel:"Subway Power · Q 1 of 4",hint:"Rectifier converts AC to DC.",q:"The purpose of the rectifier in this system is to:",opts:["Step up the voltage to 600V","Convert AC to DC for the 3rd rail","Insulate the signal main from the 3-phase source","Reduce the frequency from 60Hz to DC"],ans:1,exp:"Rectifier converts 3-phase AC to 600V DC required for subway propulsion."},
+{id:179,cat:"Circuit Diagrams",diagramId:"d6",groupLabel:"Subway Power · Q 2 of 4",hint:"1:1 = same voltage, but electrically isolated.",q:"The 1:1 transformer in the signal power circuit is used primarily to:",opts:["Double the voltage to 240V","Reduce voltage to 24V","Electrically isolate the signal main from the 3-phase supply","Convert AC to DC"],ans:2,exp:"1:1 transformer provides isolation — same voltage but protected from supply faults."},
+{id:180,cat:"Circuit Diagrams",diagramId:"d6",groupLabel:"Subway Power · Q 3 of 4",hint:"Propulsion current returns through one running rail.",q:"The negative return current for the car motors flows back through:",opts:["The 3rd rail","The signal rail","The negative propulsion current rail (one running rail)","Both running rails equally"],ans:2,exp:"Return path: wheels → negative propulsion current rail → rectifier. Heavy bonds at each joint."},
+{id:181,cat:"Circuit Diagrams",diagramId:"d6",groupLabel:"Subway Power · Q 4 of 4",hint:"Insulated joints divide the rail into sections.",q:"Insulated rail joints are installed on the signal rail in order to:",opts:["Reduce electrical resistance","Prevent the 3rd rail from shorting","Separate one track signal circuit from another","Bond the running rails together"],ans:3,exp:"Insulated joints divide signal rail into independent track circuit sections for train detection."},
+{id:182,cat:"Circuit Diagrams",diagramId:"d7",groupLabel:"Series-Parallel · Q 1 of 4",hint:"R2∥R3 first, then add R1.",q:"What is the total resistance of the circuit?",opts:["20Ω","35Ω","80Ω","15Ω"],ans:1,exp:"R2∥R3 = 15Ω. Total = 20 + 15 = 35Ω."},
+{id:183,cat:"Circuit Diagrams",diagramId:"d7",groupLabel:"Series-Parallel · Q 2 of 4",hint:"I_T = V÷R_T = 120÷35. Then V_R1 = I_T × R1.",q:"What is the voltage drop across R1 (20Ω) in this circuit?",opts:["60V","69V","51V","120V"],ans:1,exp:"I_T = 3.43A. V_R1 = 3.43 × 20 ≈ 69V."},
+{id:184,cat:"Circuit Diagrams",diagramId:"d7",groupLabel:"Series-Parallel · Q 3 of 4",hint:"Voltage across parallel bank = 120 - V_R1. Then I = V÷R2.",q:"What is the current through R2 (30Ω) in the parallel section?",opts:["3.43A","1.7A","0.57A","2.0A"],ans:1,exp:"Parallel bank voltage ≈ 51V. I_R2 = 51÷30 ≈ 1.7A."},
+{id:185,cat:"Circuit Diagrams",diagramId:"d7",groupLabel:"Series-Parallel · Q 4 of 4",hint:"R2 opens → only R3 remains → new R_T = 20+30 = 50Ω.",q:"If R2 (30Ω) develops an open circuit, what happens to the current through R1?",opts:["Current doubles","Current decreases","Current stays the same","Current goes to zero"],ans:1,exp:"New R_T = 50Ω. New I_T = 120÷50 = 2.4A (was 3.43A). Current decreases."},
+  // ── BATCH 2B: Q186-Q200 ────────────────────────────────────────
+{id:186,cat:"Motors & Controls",hint:"No commutator or slip rings — no brushes needed.",q:"One identifying feature of a squirrel-cage induction motor is that it has no:",opts:["Air gap in the stator","Commutator or slip rings","Iron core in the rotating part","Windings on the stationary part"],ans:1,exp:"Squirrel-cage motors have no commutator or slip rings. Current is induced magnetically into the rotor — no brushes, simpler and more rugged than DC motors."},
+{id:187,cat:"Motors & Controls",hint:"Weaker field = less back-EMF = motor accelerates.",q:"While a DC shunt motor drives a light load, part of the field winding becomes short-circuited. The motor will most likely:",opts:["Come to a stop","Remain at the same speed","Decrease its speed","Increase its speed"],ans:3,exp:"Shunted field = weaker magnetism = less back-EMF = motor overspeeds dangerously. Field loss protection is critical on DC shunt motors."},
+{id:188,cat:"Motors & Controls",hint:"Shunt winding: many turns of fine wire = high resistance. Series winding: few turns of heavy wire = low resistance.",q:"Comparing the shunt field winding to the series field winding of a compound DC motor, the shunt field winding has:",opts:["Fewer turns and lower resistance","More turns and higher resistance","More turns and lower resistance","Fewer turns and higher resistance"],ans:3,exp:"Shunt field: many turns of fine wire = high resistance (limits current, wired directly across supply). Series field: few turns of heavy wire = low resistance (carries full armature current)."},
+{id:189,cat:"Electrical Safety",hint:"Keeps your hands away from energized clips.",q:"The most important reason for using a fuse-puller when removing a cartridge fuse from its clips is to:",opts:["Prevent blowing the fuse during removal","Prevent damage to the fuse element","Reduce the chance of personal injury from live parts","Reduce arcing at the fuse clips"],ans:2,exp:"Fuse-puller keeps hands away from energized clips. Never remove cartridge fuses by hand on a live circuit."},
+{id:190,cat:"MTA & Theory",hint:"Transformer primary has low DC resistance. DC + low resistance = massive current.",q:"If a live 120V DC lighting circuit is connected to the 120V winding of a disconnected power transformer, the result will be:",opts:["Normal operation at slightly reduced efficiency","Magnetization of the transformer case","Sparking at the secondary terminals","Blowing of the DC circuit fuse"],ans:3,exp:"Transformer primary has very low DC resistance — no reactance with DC. Massive current flows and blows the DC fuse immediately. Transformers operate on AC only."},
+{id:191,cat:"Tools & Field",hint:"Multiple small wires twisted together vs one solid wire.",q:"The chief advantage of stranded conductors over solid conductors for electrical wiring is that stranded conductors are:",opts:["Smaller in diameter","Easier to skin","More flexible","Stronger"],ans:2,exp:"Stranded conductors are far more flexible, resisting fatigue from bending. Ideal for portable equipment, motor leads, and installations with movement or vibration."},
+{id:192,cat:"Tools & Field",hint:"Sharp internal edge from cutting can nick wire insulation during pulling.",q:"After a piece of rigid conduit has been cut to length, the most important immediate next step is to:",opts:["File the outside edge to a taper for ease in threading","Coat the cut surface with rust preventive","Ream the inside edge to remove burrs and protect wire insulation","File the end flat to make an accurate fit"],ans:2,exp:"Cutting leaves a sharp internal burr that can damage wire insulation during pulling. Always ream after cutting — NEC required."},
+{id:193,cat:"MTA & Theory",hint:"Measures rotational speed directly in RPM.",q:"Motor speeds are generally measured directly in RPM using a:",opts:["Potentiometer","Manometer","Dynamometer","Tachometer"],ans:3,exp:"A tachometer measures rotational speed in RPM. Contact type touches the shaft; optical type works without contact."},
+{id:194,cat:"MTA & Theory",hint:"If one feeder fails, what keeps signals running?",q:"In the subway signal system, each section is arranged to receive power from either of two supply feeders. The most likely reason is to:",opts:["Divide the load between two power plants","Keep the supply voltage as low as possible","Provide continuing service if one feeder goes dead","Avoid the use of very large cables"],ans:2,exp:"Redundant feeders ensure signals stay on if one feeder fails — service continuity is critical in transit safety."},
+{id:195,cat:"NEC Code",hint:"Zinc coating protects steel from moisture and corrosion.",q:"Rigid conduit used in the subway is galvanized inside and outside. The purpose of the galvanizing is to:",opts:["Protect the wiring by covering rough internal spots","Improve the appearance where conduit is exposed to view","Protect the conduit against corrosion","Provide better electrical contact for grounding"],ans:2,exp:"Galvanizing applies zinc to protect steel conduit from rust — critical in the humid subway environment."},
+{id:196,cat:"Workplace Math",hint:"AWG runs consecutively — no numbers are skipped.",q:"In the American Wire Gauge (AWG) system, after No. 4, the next larger wire size is No.:",opts:["2","3","5","6"],ans:1,exp:"AWG runs consecutively: ...6, 5, 4, 3, 2, 1, 1/0... After #4, the next larger size is #3."},
+{id:197,cat:"Meters & Instruments",hint:"Measures specific gravity of battery electrolyte.",q:"The instrument most commonly used to determine the state of charge of a lead-acid storage battery is a:",opts:["Thermometer","Voltmeter","Hydrometer","Ammeter"],ans:2,exp:"Hydrometer measures specific gravity of electrolyte. Charged: ~1.265; Discharged: ~1.120."},
+{id:198,cat:"Reading Comprehension",passageId:"p5",groupLabel:"Motor Inspection · Q 1 of 3",hint:"Find what to do when a minor defect is discovered.",q:"According to the motor inspection instructions, when a minor defect is discovered, the correct action is to:",opts:["Report it to the superior and wait for instructions","Tag the motor out and return to service after the shift","Correct it on the spot and report the action taken to your superior","Ignore it if the motor is still running normally"],ans:2,exp:"Minor defect: correct on the spot, then report the action taken to your superior."},
+{id:199,cat:"Reading Comprehension",passageId:"p5",groupLabel:"Motor Inspection · Q 2 of 3",hint:"Find the sentence about the commutator specifically.",q:"According to the passage, the commutator of a DC motor should be inspected for:",opts:["Voltage output and frequency response","Discoloration, dirt, uneven wear, and sparking at the brushes","Insulation resistance and ground faults","Bearing temperature and lubrication level"],ans:1,exp:"Inspect commutator for discoloration, dirt, uneven wear, and look for sparking at the brushes while running."},
+{id:200,cat:"Reading Comprehension",passageId:"p5",groupLabel:"Motor Inspection · Q 3 of 3",hint:"Major defects require a different response than minor ones.",q:"According to the motor inspection instructions, a major defect should be:",opts:["Corrected on the spot immediately by the inspector","Tagged and left for the next shift to handle","Reported promptly to the superior before damage becomes too great to repair","Documented in the daily log only with no other action"],ans:2,exp:"Major defects: report promptly to superior before damage becomes too great to repair — different protocol than minor defects."}
+];
+
+// APP STATE
+let mode='practice',sessionQuestions=[],currentIndex=0,score=0,streak=0,flagged=new Set(),wrongAnswers=[],usedFirst=false,timerInterval=null,elapsedSeconds=0,categoryStats={},TOTAL_PER_SESSION=10,previousScreen='home',fcIndex=0,fcKnew=0,fcMissed=0,fcQuestions=[],fcFlipped=false,currentUtterance=null,speakingTarget=null,hintUsed=false;
+
+function getHistory(){try{return JSON.parse(localStorage.getItem('mtaHistory')||'[]');}catch(e){return[];}}
+function saveSession(pct){const h=getHistory();h.push({pct,date:Date.now()});if(h.length>20)h.splice(0,h.length-20);try{localStorage.setItem('mtaHistory',JSON.stringify(h));}catch(e){}}
+function renderHomeProgress(){const h=getHistory();const wrap=document.getElementById('hp-bars-wrap');const statsEl=document.getElementById('hp-stats');if(h.length===0){wrap.innerHTML='<div class="hp-empty-msg">No sessions yet — start your first test!</div>';statsEl.style.display='none';return;}const last5=h.slice(-5);let barsHtml='<div class="hp-bars">';last5.forEach(s=>{const col=s.pct>=70?'var(--green)':s.pct>=50?'var(--accent)':'var(--red)';barsHtml+=`<div class="hp-bar-wrap"><div class="hp-bar" style="height:${s.pct}%;background:${col}"></div><div class="hp-score">${s.pct}%</div></div>`;});for(let i=last5.length;i<5;i++){barsHtml+='<div class="hp-bar-wrap"><div class="hp-bar empty" style="height:4px"></div><div class="hp-score">—</div></div>';}barsHtml+='</div>';wrap.innerHTML=barsHtml;const all=h.map(s=>s.pct);const best=Math.max(...all);const avg=Math.round(all.reduce((a,b)=>a+b,0)/all.length);document.getElementById('hp-best').textContent=best+'%';document.getElementById('hp-avg').textContent=avg+'%';document.getElementById('hp-sessions').textContent=h.length;statsEl.style.display='flex';}
+function getCategoryHistory(){try{return JSON.parse(localStorage.getItem('mtaCatHistory')||'{}');}catch(e){return{};}}
+function saveCategoryStats(stats){const existing=getCategoryHistory();Object.entries(stats).forEach(([cat,s])=>{if(!existing[cat])existing[cat]={correct:0,total:0};existing[cat].correct+=s.correct;existing[cat].total+=s.total;});try{localStorage.setItem('mtaCatHistory',JSON.stringify(existing));}catch(e){}}
+function checkDrillAvailability(){const h=getHistory();const drillBtn=document.getElementById('drill-btn');const drillMsg=document.getElementById('drill-unavail');if(h.length<2){drillBtn.style.opacity='0.5';drillMsg.style.display='block';}else{drillBtn.style.opacity='1';drillMsg.style.display='none';}}
+function startDrill(){const h=getHistory();if(h.length<2)return;const catH=getCategoryHistory();const weakCats=Object.entries(catH).filter(([,s])=>s.total>0&&(s.correct/s.total)<0.70).map(([cat])=>cat);let pool=[];QUESTIONS.forEach(q=>{if(weakCats.includes(q.cat)){pool.push(q);pool.push(q);pool.push(q);}else pool.push(q);});pool=pool.sort(()=>Math.random()-0.5);const seen=new Set();const deduped=[];for(const q of pool){if(!seen.has(q.id)){seen.add(q.id);deduped.push(q);}if(deduped.length>=TOTAL_PER_SESSION)break;}mode='drill';launchQuiz(deduped);}
+function showScreen(id){stopSpeaking();document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById(id);el.classList.add('active');window.scrollTo(0,0);if(id==='home'){renderHomeProgress();checkDrillAvailability();}}
+function goBackFromFormula(){showScreen(previousScreen);if(previousScreen==='quiz'){const hintBtn=document.getElementById('btn-hint');if(hintBtn)hintBtn.style.display=(mode==='practice'||mode==='drill')?'flex':'none';}}
+/* openFormulaFromQuiz now defined above */
+function setCount(n,el){TOTAL_PER_SESSION=n;document.querySelectorAll('.q-pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
+function startQuiz(selectedMode){mode=selectedMode;const seen=getSeenQuestions();const unseen=QUESTIONS.filter(q=>!seen.includes(q.id)).sort(()=>Math.random()-0.5);const seenQs=QUESTIONS.filter(q=>seen.includes(q.id)).sort(()=>Math.random()-0.5);const pool=[...unseen,...seenQs];const selected=pool.slice(0,Math.min(TOTAL_PER_SESSION,QUESTIONS.length));launchQuiz(selected);}
+function launchQuiz(questions){currentIndex=0;score=0;streak=0;flagged.clear();wrongAnswers=[];usedFirst=false;hintUsed=false;elapsedSeconds=0;categoryStats={};stopSpeaking();sessionQuestions=questions;sessionQuestions.forEach(q=>{if(!categoryStats[q.cat])categoryStats[q.cat]={correct:0,total:0};categoryStats[q.cat].total++;});const badge=document.getElementById('mode-badge');badge.textContent=mode==='practice'?'Practice':mode==='exam'?'Exam':mode==='drill'?'Drill':'Quiz';badge.className='quiz-mode-badge '+mode;document.querySelector('.progress-fill').style.background=mode==='practice'?'var(--green)':mode==='drill'?'var(--red)':'var(--accent)';clearInterval(timerInterval);const timerEl=document.getElementById('timer-display');if(mode==='exam'||mode==='drill'){timerEl.style.display='block';updateTimerDisplay();timerInterval=setInterval(()=>{elapsedSeconds++;updateTimerDisplay();},1000);}else{timerEl.style.display='none';}document.getElementById('streak-badge').className='streak-badge';showScreen('quiz');renderQuestion();}
+function updateTimerDisplay(){const m=Math.floor(elapsedSeconds/60),s=elapsedSeconds%60;document.getElementById('timer-display').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
+function tapOut(){stopSpeaking();document.getElementById('tapout-count').textContent=currentIndex;document.getElementById('tapout-modal').style.display='flex';}
+function closeTapOut(){document.getElementById('tapout-modal').style.display='none';}
+function confirmTapOut(){document.getElementById('tapout-modal').style.display='none';finishQuiz(currentIndex);}
+function useHint(){if(hintUsed)return;const q=sessionQuestions[currentIndex];if(!q.hint)return;hintUsed=true;document.getElementById('hint-text').textContent=q.hint;document.getElementById('hint-box').classList.add('visible');const hadStreak=streak>0;streak=0;updateStreak();const btn=document.getElementById('btn-hint');btn.classList.add('used');btn.disabled=true;btn.textContent='💬 Hint Used';document.getElementById('streak-cost-msg').textContent=hadStreak?'⚠️ Streak reset — hints have a cost!':'';}
+function stopSpeaking(){if(window.speechSynthesis)window.speechSynthesis.cancel();currentUtterance=null;speakingTarget=null;document.querySelectorAll('.tts-btn').forEach(b=>b.classList.remove('speaking'));}
+function speak(text,targetId){if(!window.speechSynthesis)return;if(speakingTarget===targetId&&window.speechSynthesis.speaking){stopSpeaking();return;}stopSpeaking();speakingTarget=targetId;const btn=document.getElementById(targetId);if(btn)btn.classList.add('speaking');const u=new SpeechSynthesisUtterance(text);u.rate=0.9;u.pitch=1.0;u.volume=1.0;u.onend=u.onerror=()=>{if(btn)btn.classList.remove('speaking');speakingTarget=null;};currentUtterance=u;window.speechSynthesis.speak(u);}
+function speakQuestion(){const q=sessionQuestions[currentIndex];const letters=['A','B','C','D'];const optBtns=document.querySelectorAll('.option-btn');let optText='';optBtns.forEach((b,i)=>{optText+=`. Option ${letters[i]}: ${b.querySelector('span:last-child').textContent}`;});speak(`Question: ${q.q}${optText}`,'tts-q-btn');}
+function speakExplanation(){speak(document.getElementById('feedback-text').textContent,'tts-exp-btn');}
+function renderQuestion(){stopSpeaking();const q=sessionQuestions[currentIndex];usedFirst=false;hintUsed=false;document.getElementById('q-category').textContent=q.cat;document.getElementById('q-text').textContent=q.q;const pct=(currentIndex/TOTAL_PER_SESSION)*100;document.getElementById('progress-fill').style.width=pct+'%';document.getElementById('quiz-counter').textContent=`Q ${currentIndex+1} / ${TOTAL_PER_SESSION}`;document.getElementById('flag-btn').className='flag-btn'+(flagged.has(currentIndex)?' flagged':'');document.getElementById('feedback-box').className='feedback-box';document.getElementById('tts-exp-btn').style.display='none';const hintBox=document.getElementById('hint-box');hintBox.classList.remove('visible');document.getElementById('hint-text').textContent='';document.getElementById('streak-cost-msg').textContent='';const actionRow=document.getElementById('quiz-action-row');const hintBtn=document.getElementById('btn-hint');if(mode==='practice'||mode==='drill'){actionRow.style.display='flex';hintBtn.style.display='flex';hintBtn.classList.remove('used');hintBtn.disabled=false;hintBtn.textContent='💬 Hint';if(!q.hint){hintBtn.disabled=true;hintBtn.style.opacity='0.3';}else{hintBtn.style.opacity='';}}else{actionRow.style.display='flex';hintBtn.style.display='none';}const nextBtn=document.getElementById('btn-next');nextBtn.className='btn-next'+(mode==='practice'?' practice-style':mode==='drill'?' drill-style':'');nextBtn.textContent=currentIndex===TOTAL_PER_SESSION-1?'Finish →':'Next →';const passArea=document.getElementById('passage-area');if(q.passageId&&PASSAGES[q.passageId]){document.getElementById('passage-text').textContent=PASSAGES[q.passageId].text;document.getElementById('passage-group-tag').textContent=q.groupLabel||'';passArea.style.display='block';}else{passArea.style.display='none';}const diagArea=document.getElementById('diagram-area');if(q.diagramId&&DIAGRAMS[q.diagramId]){document.getElementById('diagram-svg-wrap').innerHTML=DIAGRAMS[q.diagramId];document.getElementById('diagram-group-tag').textContent=q.groupLabel||'';diagArea.style.display='block';}else{diagArea.style.display='none';}const letters=['A','B','C','D'];const shuffledOpts=q.passageId?q.opts.map((text,i)=>({text,isCorrect:i===q.ans})):q.opts.map((text,i)=>({text,isCorrect:i===q.ans})).sort(()=>Math.random()-0.5);const list=document.getElementById('options-list');list.innerHTML='';shuffledOpts.forEach((opt,i)=>{const btn=document.createElement('button');btn.className='option-btn';btn.innerHTML=`<span class="option-letter">${letters[i]}</span><span>${opt.text}</span>`;btn.onclick=()=>selectOption(btn,opt.isCorrect,q);list.appendChild(btn);});}
+function selectOption(btn,isCorrect,q){if(mode==='practice'||mode==='drill')handlePracticeAnswer(btn,isCorrect,q);else handleExamAnswer(btn,isCorrect,q);}
+function handlePracticeAnswer(btn,isCorrect,q){if(isCorrect){btn.classList.add('correct');disableOptions();if(!usedFirst){score++;streak++;categoryStats[q.cat].correct++;}else{streak=0;}updateStreak();showFeedback(true,q.exp);document.getElementById('btn-next').classList.add('visible');}else{if(!usedFirst){usedFirst=true;btn.classList.add('selected-wrong');setTimeout(()=>btn.classList.remove('selected-wrong'),400);btn.disabled=true;streak=0;updateStreak();wrongAnswers.push({q,userAns:btn.querySelector('span:last-child').textContent});}else{btn.classList.add('selected-wrong');disableOptions();highlightCorrect();showFeedback(false,q.exp);document.getElementById('btn-next').classList.add('visible');}}}
+function handleExamAnswer(btn,isCorrect,q){const userAns=btn.querySelector('span:last-child').textContent;disableOptions();btn.style.opacity='.65';if(isCorrect){score++;categoryStats[q.cat].correct++;}else wrongAnswers.push({q,userAns});document.getElementById('btn-next').classList.add('visible');}
+function disableOptions(){document.querySelectorAll('.option-btn').forEach(b=>b.disabled=true);}
+function highlightCorrect(){const q=sessionQuestions[currentIndex];document.querySelectorAll('.option-btn').forEach(btn=>{if(btn.querySelector('span:last-child').textContent===q.opts[q.ans])btn.classList.add('correct');});}
+function showFeedback(isCorrect,explanation){const box=document.getElementById('feedback-box'),title=document.getElementById('feedback-title'),text=document.getElementById('feedback-text');box.className='feedback-box '+(isCorrect?'correct-fb':'wrong-fb');title.textContent=isCorrect?(usedFirst?'✓ Correct on 2nd try':'✓ Correct!'):'✗ Incorrect';text.textContent=explanation;if(mode==='practice'||mode==='drill')document.getElementById('tts-exp-btn').style.display='flex';}
+function updateStreak(){const el=document.getElementById('streak-badge');if((mode==='practice'||mode==='drill')&&streak>=3){el.textContent=`🔥 ${streak}`;el.className='streak-badge visible';}else el.className='streak-badge';}
+function toggleFlag(){const btn=document.getElementById('flag-btn');if(flagged.has(currentIndex)){flagged.delete(currentIndex);btn.className='flag-btn';}else{flagged.add(currentIndex);btn.className='flag-btn flagged';}}
+function nextQuestion(){stopSpeaking();currentIndex++;if(currentIndex>=TOTAL_PER_SESSION)finishQuiz(TOTAL_PER_SESSION);else{renderQuestion();window.scrollTo(0,0);}}
+function finishQuiz(answered){clearInterval(timerInterval);stopSpeaking();markQuestionsSeen(sessionQuestions.map(q=>q.id));const pct=answered>0?Math.round((score/answered)*100):0;const pass=pct>=70;saveSession(pct);saveCategoryStats(categoryStats);document.getElementById('score-fraction').textContent=`${score}/${answered}`;document.getElementById('score-pct').textContent=`${pct}%`;document.getElementById('score-ring').className='results-score-ring '+(pass?'pass':'fail');const v=document.getElementById('results-verdict');v.textContent=pass?'🎉 Great Job!':'📚 Keep Studying';v.className='results-verdict '+(pass?'pass':'fail');let msg=pass?`You scored ${pct}% — above the passing threshold!`:`You scored ${pct}%. Focus on weak categories below.`;if(mode==='exam'||mode==='drill'){const m=Math.floor(elapsedSeconds/60),s=elapsedSeconds%60;msg+=` Time: ${m}m ${s}s.`;}if(answered<TOTAL_PER_SESSION)msg+=` (Tapped out after ${answered} questions.)`;document.getElementById('results-sub').textContent=msg;const breakdownEl=document.getElementById('breakdown-rows');breakdownEl.innerHTML='';Object.entries(categoryStats).forEach(([cat,stat])=>{if(stat.total===0)return;const p=stat.total>0?(stat.correct/stat.total)*100:0;const col=p>=80?'#00c853':p>=60?'#f0a500':'#ff3d3d';const row=document.createElement('div');row.className='breakdown-row';row.innerHTML=`<div class="breakdown-cat">${cat}</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" style="width:${p}%;background:${col}"></div></div><div class="breakdown-frac" style="color:${col}">${stat.correct}/${stat.total}</div>`;breakdownEl.appendChild(row);});document.getElementById('btn-flagged').style.display=flagged.size>0?'block':'none';showScreen('results');}
+function showReview(type){stopSpeaking();const body=document.getElementById('review-body'),title=document.getElementById('review-title');body.innerHTML='';let items=[];if(type==='wrong'){title.textContent=`Wrong Answers (${wrongAnswers.length})`;items=wrongAnswers;}else{title.textContent=`Flagged (${flagged.size})`;items=[...flagged].map(i=>({q:sessionQuestions[i],userAns:null,flagged:true}));}if(items.length===0){body.innerHTML='<p style="color:var(--gray);padding:20px;text-align:center;">Nothing to review!</p>';showScreen('review');return;}items.forEach((item,idx)=>{const q=item.q;const card=document.createElement('div');card.className='review-card '+(item.flagged?'flagged-card':'wrong-card');card.innerHTML=`<div class="review-q-header"><span class="review-status">${item.flagged?'🚩':'✗'}</span><span class="review-q-num">${q.cat} · Q${idx+1}</span></div><div class="review-q-text">${q.q}</div>${item.userAns?`<div class="review-answer-row review-wrong-ans">Your answer: ${item.userAns}</div>`:''}<div class="review-answer-row review-correct-ans">✓ Correct: ${q.opts[q.ans]}</div><div class="review-explanation">${q.exp}</div>`;body.appendChild(card);});showScreen('review');}
+function startFlashcard(){fcIndex=0;fcKnew=0;fcMissed=0;fcFlipped=false;fcQuestions=[...QUESTIONS].sort(()=>Math.random()-0.5).slice(0,Math.min(TOTAL_PER_SESSION,QUESTIONS.length));document.getElementById('fc-knew-count').textContent='✓ 0';document.getElementById('fc-miss-count').textContent='✗ 0';showScreen('flashcard');renderFlashcard();}
+function renderFlashcard(){const q=fcQuestions[fcIndex];fcFlipped=false;document.getElementById('fc-card').classList.remove('flipped');document.getElementById('fc-cat').textContent=q.cat;document.getElementById('fc-q').textContent=q.q;document.getElementById('fc-a').textContent=q.opts[q.ans];document.getElementById('fc-hint').textContent='Tap card to reveal answer';document.getElementById('fc-actions').style.display='none';document.getElementById('fc-before-actions').style.display='flex';document.getElementById('fc-progress').style.width=((fcIndex/fcQuestions.length)*100)+'%';document.getElementById('fc-counter').textContent=`${fcIndex+1} / ${fcQuestions.length}`;}
+function flipCard(){if(fcFlipped)return;fcFlipped=true;document.getElementById('fc-card').classList.add('flipped');document.getElementById('fc-hint').textContent='Did you know it?';document.getElementById('fc-actions').style.display='flex';document.getElementById('fc-before-actions').style.display='none';}
+function fcAnswer(knew){if(knew)fcKnew++;else fcMissed++;document.getElementById('fc-knew-count').textContent=`✓ ${fcKnew}`;document.getElementById('fc-miss-count').textContent=`✗ ${fcMissed}`;fcIndex++;if(fcIndex>=fcQuestions.length){alert(`Flashcards complete!\nKnew: ${fcKnew} ✓\nMissed: ${fcMissed} ✗\nScore: ${Math.round((fcKnew/fcQuestions.length)*100)}%`);showScreen('mode-select');}else renderFlashcard();}
+
+
+// ── TAB SWITCHING ─────────────────────────────────────────────────
+function switchTab(tab) {
+  document.querySelectorAll('.fs-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.fs-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+function openSheet(tab) {
+  const activeEl = document.querySelector('.screen.active'); previousScreen = activeEl ? activeEl.id : 'home';
+  showScreen('formula-sheet');
+  switchTab(tab || 'formulas');
+}
+
+function openFormulaFromQuiz() {
+  previousScreen = 'quiz';
+  showScreen('formula-sheet');
+  switchTab('formulas');
+}
+
+// ── SMART SHUFFLE ─────────────────────────────────────────────────
+function getSeenQuestions() {
+  try { return JSON.parse(localStorage.getItem('mtaSeen') || '[]'); } catch(e) { return []; }
+}
+function markQuestionsSeen(ids) {
+  let seen = getSeenQuestions();
+  // Add new ids
+  ids.forEach(id => { if (!seen.includes(id)) seen.push(id); });
+  // Keep only last 140 (out of 200) so questions eventually cycle back
+  if (seen.length > 140) seen = seen.slice(seen.length - 140);
+  try { localStorage.setItem('mtaSeen', JSON.stringify(seen)); } catch(e) {}
+}
+
+renderHomeProgress();
+checkDrillAvailability();
+
+if('serviceWorker' in navigator){const swCode=`const CACHE='mta-prep-v4';const ASSETS=[self.location.href];self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>caches.match(e.request))));});`;const swBlob=new Blob([swCode],{type:'application/javascript'});const swUrl=URL.createObjectURL(swBlob);navigator.serviceWorker.register(swUrl).catch(()=>{});}
+
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;showInstallBanner();});
+function showInstallBanner(){if(localStorage.getItem('installDismissed'))return;const banner=document.getElementById('install-banner');if(banner)banner.style.display='flex';}
+function installApp(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;dismissInstall();});}
+function dismissInstall(){const banner=document.getElementById('install-banner');if(banner)banner.style.display='none';localStorage.setItem('installDismissed','1');}
+window.addEventListener('appinstalled',()=>{dismissInstall();});
+</script>
+
+<div id="install-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:#0f2040;border-top:1px solid #1e3a5f;padding:14px 18px;align-items:center;gap:14px;">
+  <div style="flex:1;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;color:#f0a500;letter-spacing:1px;text-transform:uppercase;">Install as App</div>
+    <div style="font-size:12px;color:#8a9bb5;margin-top:2px;">Add to home screen for offline access</div>
+  </div>
+  <button onclick="installApp()" style="background:#f0a500;color:#0a1628;border:none;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:1px;text-transform:uppercase;padding:10px 20px;border-radius:4px;cursor:pointer;">Install</button>
+  <button onclick="dismissInstall()" style="background:none;border:1px solid #1e3a5f;color:#8a9bb5;font-size:18px;width:32px;height:32px;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+</div>
+</body>
+</html>
